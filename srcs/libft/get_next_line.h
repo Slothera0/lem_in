@@ -21,9 +21,8 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_gnl_strjoin(char *s1, char *s2);
 char	*ft_strdup_stop(char *str);
-size_t	ft_strlen(char *str);
 char	*suppr_current_line(char *str, char **buffer);
 int		read_line(char **buf, int fd);
 char	*double_free(char *s1, char *s2);

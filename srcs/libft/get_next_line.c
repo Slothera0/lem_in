@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 
 char	*get_next_line(int fd)
 {
@@ -32,7 +33,7 @@ char	*get_next_line(int fd)
 			return (str);
 		else if (ret < 0)
 			return (NULL);
-		str = ft_strjoin(str, ft_strdup_stop(buf));
+		str = ft_gnl_strjoin(str, ft_strdup_stop(buf));
 		suppr_current_line(buf, &buffer);
 		if (!str || str[ft_strlen(str) - 1] == '\n')
 			break ;
@@ -55,4 +56,3 @@ int	read_line(char **buf, int fd)
 		free((*buf));
 	return (ret);
 }
-

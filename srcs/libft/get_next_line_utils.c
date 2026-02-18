@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, char *s2)
 {
 	char	*dst;
 	size_t	i;
@@ -60,18 +61,6 @@ char	*ft_strdup_stop(char *str)
 		dst[i++] = '\n';
 	dst[i] = '\0';
 	return (dst);
-}
-
-size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
 }
 
 char	*suppr_current_line(char *str, char **buffer)
