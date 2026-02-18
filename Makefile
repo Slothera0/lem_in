@@ -31,6 +31,7 @@ all:
 	@$(MAKE) -s $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)✔ $(NAME) created successfully!$(RESET)"
 
 $(LIBFT):
