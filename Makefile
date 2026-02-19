@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
-INCLUDES = -I ./includes -I ./srcs/libft
+INCLUDES = -I ./includes -I ./srcs/libft -I ./srcs/vector
 
 F_OBJS = .objs/
 F_SRCS = srcs/
@@ -17,6 +17,9 @@ NAME = lem_in
 LIBFT_PATH = ./srcs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
+VECTOR_PATH = ./srcs/vector
+VECTOR = $(VECTOR_PATH)/vector.a
+
 TOTAL := $(words $(SRCS))
 COUNT = 0
 
@@ -30,12 +33,15 @@ all:
 	@echo "$(BLUE)🔧 Compiling lem_in...$(RESET)"
 	@$(MAKE) -s $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(VECTOR)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(VECTOR) -o $(NAME)
 	@echo "$(GREEN)✔ $(NAME) created successfully!$(RESET)"
 
 $(LIBFT):
 	@$(MAKE) -sC $(LIBFT_PATH)
+
+$(VECTOR):
+	@$(MAKE) -sC $(VECTOR_PATH)
 
 $(F_OBJS)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -55,12 +61,14 @@ clean:
 	@echo "$(YELLOW)🧹 Cleaning $(NAME) object files...$(RESET)"
 	@rm -rf $(F_OBJS)
 	@$(MAKE) -sC $(LIBFT_PATH) clean
+	@$(MAKE) -sC $(VECTOR_PATH) clean
 	@echo "$(GREEN)✔ Clean complete$(RESET)"
 
 fclean: clean
 	@echo "$(YELLOW)🗑 Removing $(NAME)...$(RESET)"
 	@rm -f $(NAME)
 	@$(MAKE) -sC $(LIBFT_PATH) fclean
+	@$(MAKE) -sC $(VECTOR_PATH) fclean
 	@echo "$(GREEN)✔ Full clean complete$(RESET)"
 
 re: fclean all
