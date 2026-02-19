@@ -7,7 +7,7 @@ F_SRCS = srcs/
 F_PARSE = $(F_SRCS)parse/
 
 SRCS = $(F_SRCS)main.c \
-       $(F_PARSE)read_file.c $(F_PARSE)create_node.c $(F_PARSE)create_link.c
+       $(F_PARSE)read_term.c $(F_PARSE)create_node.c $(F_PARSE)create_link.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

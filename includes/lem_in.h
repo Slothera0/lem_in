@@ -14,7 +14,7 @@ typedef enum e_room_type {
 typedef struct s_node
 {
 	char 		*name;
-	t_node 		*links;
+	struct t_node 		*links;
 	int 		x;
 	int 		y;
 	t_room_type type;
