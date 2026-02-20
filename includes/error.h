@@ -1,8 +1,12 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-# define MALLOC 1
+typedef enum e_error
+{
+	MALLOC_ERROR = -1,
+	PARSE_ERROR = -2,
+} t_error ;
 
-void	ft_error(int statut);
+int	ft_error(int statut);
 
 #endif
