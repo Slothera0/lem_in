@@ -1,19 +1,22 @@
 #include "get_next_line.h"
 #include "libft.h"
 #include "lem_in.h"
+#include "vector.h"
+#include "error.h"
 
-void create_link();
-void create_node();
+int create_link(t_vector *nodes, char *args);
+int create_node(t_vector *nodes, char **args);
 
 static t_room_type	set_type(char *line);
 
-t_node *read_term()
+t_vector *read_term()
 {
-	t_node		*nodes = NULL;
+	t_vector	*nodes;
 	char		*line;
 	char		**split_line;
 	t_room_type	type;
 
+	nodes = vec_create(10);
 	line = get_next_line(0);
 	type = NORMAL;
 	while (line)
@@ -23,12 +26,14 @@ t_node *read_term()
 		else
 		{
 			split_line = ft_split(line, ' ');
-			if (ft_sstrlen(split_line) == 3)
-				create_node();
-			if (ft_sstrlen(split_line) == 1)
-				create_link();
+			if (ft_sstrlen(split_line) == 3 && create_node(nodes, split_line) == -1)
+				return (ft_error(MALLOC), NULL);
+			if (ft_sstrlen(split_line) == 1 && create_link(nodes, split_line[0]) == -1)
+				return (ft_error(MALLOC), NULL);
+			ft_free_array(split_line);
 		}
 
+		free(line);
 		line = get_next_line(0);
 	}
 

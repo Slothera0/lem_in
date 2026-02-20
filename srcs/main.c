@@ -1,21 +1,14 @@
 #include "lem_in.h"
+#include "vector.h"
 
-t_node *read_term();
+t_vector *read_term();
 
 int	main()
 {
 	
-	t_node *node;
+	t_vector *node;
 
 	node = read_term();
-	// char *s = NULL;
-	// s = get_next_line(0);
-
-	// while(s)
-	// {
-	// 	printf("%s", s);
-	// 	s = get_next_line(0);
-	// }
-
+	vec_free(node);
 	return (0);
 }

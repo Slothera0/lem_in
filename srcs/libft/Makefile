@@ -49,7 +49,8 @@ ft_lstiter_bonus.c \
 ft_lstlast_bonus.c \
 ft_lstmap_bonus.c \
 ft_lstnew_bonus.c \
-ft_lstsize_bonus.c
+ft_lstsize_bonus.c \
+ft_free_array.c
 
 OBJS = $(SOURCES:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)
