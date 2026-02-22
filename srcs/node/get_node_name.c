@@ -1,4 +1,4 @@
-#include "lem_in.h"
+#include "node.h"
 
 char *get_node_name(t_node *node)
 {

@@ -1,10 +1,9 @@
-#include <stdio.h>
 #include "vector.h"
-#include "lem_in.h"
+#include "node.h"
 #include "libft.h"
 #include "ft_error.h"
 
-void	free_node(t_node *node);
+void	free_node(void *data);
 t_node	*get_node(t_vector *vector, char *name);
 
 int create_node(t_vector *nodes, char **args, t_room_type type)
@@ -41,7 +40,8 @@ int create_node(t_vector *nodes, char **args, t_room_type type)
 	new->y = ft_atoi(args[2]);
 	new->type = type;
 
-	vec_append(nodes, new);
+	if (!vec_append(nodes, new))
+		free_node(new);
 
 	return (0);
 }

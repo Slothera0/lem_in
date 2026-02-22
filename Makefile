@@ -5,12 +5,12 @@ INCLUDES = -I ./includes -I ./srcs/libft -I ./srcs/vector
 F_OBJS = .objs/
 F_SRCS = srcs/
 F_PARSE = $(F_SRCS)parse/
+F_NODE = $(F_SRCS)node/
 
 SRCS = 	$(F_SRCS)main.c \
 		$(F_SRCS)error.c \
-		$(F_SRCS)print_node.c \
-		$(F_SRCS)get_node_name.c \
-       	$(F_PARSE)read_term.c $(F_PARSE)create_node.c $(F_PARSE)create_link.c $(F_PARSE)get_node.c  $(F_PARSE)free_node.c 
+		$(F_NODE)print_node.c $(F_NODE)get_node_name.c $(F_NODE)create_node.c $(F_NODE)create_link.c $(F_NODE)get_node.c  $(F_NODE)free_node.c \
+       	$(F_PARSE)read_term.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)
