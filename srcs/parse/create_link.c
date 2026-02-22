@@ -5,8 +5,12 @@
 
 int create_link(t_vector *nodes, char *args)
 {
-	(void)nodes;
-	(void)args;
-	printf("a\n");
+	char **split = ft_split(args, '-');
+
+	if (ft_sstrlen(split) != 2)
+	{
+		
+	}
+
 	return (0);
 }

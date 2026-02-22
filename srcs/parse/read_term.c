@@ -2,7 +2,7 @@
 #include "libft.h"
 #include "lem_in.h"
 #include "vector.h"
-#include "error.h"
+#include "ft_error.h"
 
 int create_link(t_vector *nodes, char *args);
 int create_node(t_vector *nodes, char **args, t_room_type type);
