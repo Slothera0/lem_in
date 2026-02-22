@@ -1,4 +1,4 @@
-#include "error.h"
+#include "ft_error.h"
 #include "libft.h"
 
 int	ft_error(int statut)

@@ -7,7 +7,8 @@ F_OBJS = .objs/
 SOURCES = 	vec_append.c \
 			vec_create.c \
 			vec_copy.c \
-			vec_free.c
+			vec_free.c \
+			vec_iter.c
 
 OBJS = $(SOURCES:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

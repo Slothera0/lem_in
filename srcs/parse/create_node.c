@@ -5,6 +5,7 @@
 #include "ft_error.h"
 
 void	free_node(t_node *node);
+t_node	*get_node(t_vector *vector, char *name);
 
 int create_node(t_vector *nodes, char **args, t_room_type type)
 {
@@ -21,18 +22,18 @@ int create_node(t_vector *nodes, char **args, t_room_type type)
 		return (MALLOC_ERROR);
 	}
 	
-	if (ft_strchr(args[0], '-'))
+	if (ft_strchr(args[0], '-') || get_node(nodes, args[0]))
 	{
-		free(node->links);
-		free(node);
+		free(new->links);
+		free(new);
 		return (PARSE_ERROR);
 	}
 
 	new->name = ft_strdup(args[0]);
 	if (!new->name)
 	{
-		free(node->links);
-		free(node);
+		free(new->links);
+		free(new);
 		return (MALLOC_ERROR);
 	}
 

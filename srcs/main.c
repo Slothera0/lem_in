@@ -2,7 +2,9 @@
 #include "vector.h"
 #include <stdio.h>
 
-t_vector *read_term();
+t_vector	*read_term();
+void		print_node(void *data);
+void		free_node(void *data);
 
 int	main()
 {
@@ -11,10 +13,8 @@ int	main()
 
 	nodes = read_term();
 
-	for (unsigned int i = 0; i < nodes->size; i++)
-	{
-		printf("Node: %s  %i-%i\n", ((t_node *)nodes->array[i])->name, ((t_node *)nodes->array[i])->x, ((t_node *)nodes->array[i])->y);
-	}
+	vec_iter(nodes, print_node);
+	vec_iter(nodes, free_node);
 	vec_free(nodes);
 	return (0);
 }

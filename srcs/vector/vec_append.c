@@ -6,7 +6,7 @@ t_vector	*vec_append(t_vector *vector, void *content)
 
 	if (vector->max_size == vector->size)
 	{
-		new = vec_create(vector->max_size + 10);
+		new = vec_create(vector->max_size * 2);
 		if (!new)
 		return (NULL);
 		

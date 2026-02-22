@@ -50,7 +50,12 @@ ft_lstlast_bonus.c \
 ft_lstmap_bonus.c \
 ft_lstnew_bonus.c \
 ft_lstsize_bonus.c \
-ft_free_array.c
+ft_free_array.c \
+ft_strcmp.c \
+ft_printf.c \
+ft_putchar.c \
+ft_putnbr_base.c \
+ft_putstr.c
 
 OBJS = $(SOURCES:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

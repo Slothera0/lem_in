@@ -1,8 +1,7 @@
-
-
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+#include "vector.h"
 
 typedef enum e_room_type {
     START,
@@ -14,7 +13,7 @@ typedef enum e_room_type {
 typedef struct s_node
 {
 	char 			*name;
-	struct t_node 	*links;
+	t_vector 		*links;
 	int 			x;
 	int 			y;
 	t_room_type 	type;

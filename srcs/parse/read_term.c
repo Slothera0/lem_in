@@ -18,6 +18,8 @@ t_vector *read_term()
 
 	while (line)
 	{
+		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
 		if (line[0] == '#' || line[0] == 'L')
 			type = set_type(line); // peut etre rajouter des options prochainement
 		else
