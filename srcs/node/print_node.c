@@ -25,10 +25,12 @@ void	print_node(void *data)
 	}
 	ft_printf("links: ");
 	unsigned int i = 0;
-	for (; i < node->links->size - 1; i++)
+	for (; i + 1 < node->links->size; i++)
 	{
 		ft_printf("%s, ", get_node_name(node->links->array[i]));
 	}
-	ft_printf("%s\n", get_node_name(node->links->array[i]));
-
+	if (node->links->size > 0)
+		ft_printf("%s\n", get_node_name(node->links->array[i]));
+	else
+		ft_printf("\n");
 }

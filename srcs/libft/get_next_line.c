@@ -20,6 +20,12 @@ char	*get_next_line(int fd)
 	int			ret;
 	char		*buf;
 
+	if (fd == -1)
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
 	str = ft_strdup_stop(buffer);
 	if (buffer)
 		suppr_current_line(buffer, &buffer);
