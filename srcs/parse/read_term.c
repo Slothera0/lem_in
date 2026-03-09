@@ -32,6 +32,7 @@ t_lem_in *read_term()
 	if (data->nb_ants <= 0)
 	{
 		free(data);
+		get_next_line(-1);
 		if (errno == 0)
 			ft_putstr_fd("ERROR\n", 2);
 		else
@@ -70,6 +71,7 @@ static int	get_nb_ant()
 	if (line)
 		nb_ant = ft_atoi(line);
 
+	free(line);
 	return (nb_ant);
 }
 
@@ -81,27 +83,26 @@ static t_vector *parse_data()
 
 	if (!nodes)
 		return (NULL);
-	while(line)
+	while (line)
 	{
-		if (line[0] == 'L')
-			break ;
 		type = parse_nodes(nodes, line, type);
 		if (errno != 0)
 		{
-			free(line);
-			if (errno > 0)
+			if (errno < 0)
 			{
-				vec_iter(nodes, free_node);
-				vec_free(nodes);
-				return (NULL);
+				errno = 0;
+				break ;
 			}
-			return (nodes);
+			free(line);
+			vec_iter(nodes, free_node);
+			vec_free(nodes);
+			return (NULL);
 		}
 		free(line);
 		line = get_next_line(0);
 	}
 
-	while(line)
+	while (line)
 	{
 		parse_link(nodes, line);
 		if (errno != 0)
@@ -148,7 +149,6 @@ static t_room_type parse_nodes(t_vector *nodes, char *line, t_room_type type)
 		else if (ret == PARSE_ERROR)
 		{
 			errno = PARSE_ERROR;
-			get_next_line(-1);
 			ft_free_array(split_line);
 			return (type);
 		}
@@ -164,24 +164,16 @@ static void	parse_link(t_vector *nodes, char *line)
 		line[ft_strlen(line) - 1] = '\0';
 	if (line[0] == '#')
 		return ;
-	else if (line[0] == 'L')
+	int ret = create_link(nodes, line);
+	if (ret == MALLOC_ERROR)
 	{
-		int ret = create_link(nodes, line + 1);
-		if (ret == MALLOC_ERROR)
-		{
-			get_next_line(-1);
-			return ;
-		}
-		else if (ret == PARSE_ERROR)
-		{
-			errno = PARSE_ERROR;
-			get_next_line(-1);
-			return ;
-		}
+		get_next_line(-1);
+		return ;
 	}
-	else
+	else if (ret == PARSE_ERROR)
 	{
 		errno = PARSE_ERROR;
 		get_next_line(-1);
+		return ;
 	}
 }
