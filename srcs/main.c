@@ -5,8 +5,10 @@
 #include <errno.h>
 
 t_lem_in	*read_term();
-void		print_node(void *data);
 void		free_node(void *data);
+
+void	print_node(void *data);
+t_node 	*get_start(t_vector *vector);
 
 int	main()
 {
@@ -18,6 +20,8 @@ int	main()
 
 	nodes = data->node;
 	vec_iter(nodes, print_node);
+	print_node(get_start(nodes));
+
 	vec_iter(nodes, free_node);
 	vec_free(nodes);
 	free(data);
