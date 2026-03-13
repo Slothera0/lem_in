@@ -21,7 +21,7 @@ def generate_rooms(nb_rooms):
     return rooms
 
 
-def generate_links(rooms, probability=0.1):
+def generate_links(rooms, probability=0.001):
     links = set()
     room_names = [room[0] for room in rooms]
 
