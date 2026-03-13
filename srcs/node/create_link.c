@@ -4,6 +4,7 @@
 #include "ft_error.h"
 
 t_node *get_node(t_vector *vector, char *name);
+void	print_node(void *data);
 
 int create_link(t_vector *nodes, char *args)
 {
@@ -23,11 +24,15 @@ int create_link(t_vector *nodes, char *args)
 	if (!n1 || !n2)
 		return (PARSE_ERROR);
 
-	if (!vec_append(n1->links, n2))
+	n1->links = vec_append(n1->links, n2);
+	if (!n1->links)
 		return (MALLOC_ERROR);
 
-	if (!vec_append(n2->links, n1))
+	n2->links = vec_append(n2->links, n1);
+	if (!n2->links)
 		return (MALLOC_ERROR);
 
+	print_node(n1);
+	print_node(n2);
 	return (0);
 }
