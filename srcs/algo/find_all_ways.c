@@ -44,6 +44,7 @@ static void	rec_find_all_way(t_vector *current)
 	t_vector	*new_way;
 	t_vector	*unique_links;
 
+	printf("Depth: %u, all_way size: %u\n", current->size, all_way->size);
 	current_node = vec_end(current);
 	
 	if (current_node->type == END)
