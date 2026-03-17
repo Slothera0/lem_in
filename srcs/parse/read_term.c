@@ -12,12 +12,12 @@ t_vector 	*create_node(t_vector *nodes, char **args, t_room_type type);
 void		free_node(void *data);
 int			one_end(t_vector *nodes);
 int			one_start(t_vector *nodes);
+t_room_type	set_type(char *line);
+int			get_nb_ant();
 
-static int			get_nb_ant();
 static void			parse_data();
 static t_room_type 	parse_nodes(char *line, t_room_type type);
 static void			parse_link(char *line);
-static t_room_type	set_type(char *line);
 
 static t_vector *nodes;
 
@@ -65,46 +65,6 @@ t_lem_in *read_term()
 	}
 
 	return (data);
-}
-
-
-static t_room_type	set_type(char *line)
-{
-	if (ft_strncmp(line, "##start", ft_strlen(line)) == 0)
-		return (START);
-	if (ft_strncmp(line, "##end", ft_strlen(line)) == 0)
-		return (END);
-	return (NORMAL);
-}
-
-static int	get_nb_ant()
-{
-	char 	*line;
-	int		nb_ant;
-	int 	i;
-
-	nb_ant = -1;
-	i = 0;
-	line = get_next_line(0);
-	if (!line)
-		return (0);
-	while(line[i] != '\n')
-	{
-		if (line[i] > '9' || line[i] < '0')
-		{
-			free(line);
-			return (0);
-		}
-		i++;
-	}
-	if (i == 0)
-	{
-		free(line);
-		return (0);
-	}
-	nb_ant = ft_atoi(line);
-	free(line);
-	return (nb_ant);
 }
 
 static void parse_data()
@@ -179,8 +139,6 @@ static t_room_type parse_nodes(char *line, t_room_type type)
 		{
 			if (errno > 0)
 				get_next_line(-1);
-			else
-				errno = PARSE_ERROR;
 			ft_free_array(split_line);
 			return (type);
 		}

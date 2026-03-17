@@ -6,6 +6,7 @@
 
 void	free_node(void *data);
 t_node	*get_node(t_vector *vector, char *name);
+int		is_a_num(char *str);
 
 t_vector *create_node(t_vector *nodes, char **args, t_room_type type)
 {
@@ -34,6 +35,13 @@ t_vector *create_node(t_vector *nodes, char **args, t_room_type type)
 		free(new->links);
 		free(new);
 		return (NULL);
+	}
+
+	if (!is_a_num(args[1]) || !is_a_num(args[2]))
+	{
+		errno = PARSE_ERROR;
+		free_node(new);
+		return (nodes);
 	}
 
 	new->x = ft_atoi(args[1]);
