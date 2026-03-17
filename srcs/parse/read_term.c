@@ -10,6 +10,8 @@
 int 		create_link(t_vector *nodes, char *args);
 t_vector 	*create_node(t_vector *nodes, char **args, t_room_type type);
 void		free_node(void *data);
+int			one_end(t_vector *nodes);
+int			one_start(t_vector *nodes);
 
 static int			get_nb_ant();
 static void			parse_data();
@@ -30,7 +32,7 @@ t_lem_in *read_term()
 		exit(1);
 	}
 	data->nb_ants = get_nb_ant();
-	if (data->nb_ants <= 0)
+	if (data->nb_ants == 0)
 	{
 		free(data);
 		get_next_line(-1);
@@ -50,6 +52,15 @@ t_lem_in *read_term()
 			perror("ERROR");
 		else
 			ft_putstr_fd("ERROR\n", 2);
+		exit(1);
+	}
+	
+	if (!one_start(nodes) || !one_end(nodes))
+	{
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
+		ft_putstr_fd("ERROR\n", 2);
 		exit(1);
 	}
 
@@ -151,7 +162,7 @@ static t_room_type parse_nodes(char *line, t_room_type type)
 	char	**split_line = NULL;
 
 	if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
-	line[ft_strlen(line) - 1] = '\0';
+		line[ft_strlen(line) - 1] = '\0';
 	if (!line || line[0] == '\0')
 	{
 		errno = PARSE_ERROR;
@@ -159,7 +170,7 @@ static t_room_type parse_nodes(char *line, t_room_type type)
 		return (type);
 	}
 	if (line[0] == '#')
-	type = set_type(line);
+		type = set_type(line);
 	else
 	{
 		split_line = ft_split(line, ' ');

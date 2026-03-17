@@ -24,7 +24,7 @@ int	main()
 	nodes = data->node;
 
 	vec_iter(nodes, print_node);
-	print_node(get_start(nodes));
+	// print_node(get_start(nodes));
 
 	// all_way = find_all_way(data);
 	// vec_iter(all_way, print_way);
