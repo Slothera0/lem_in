@@ -30,12 +30,6 @@ t_lem_in *read_term()
 		exit(1);
 	}
 	data->nb_ants = get_nb_ant();
-	if (data->nb_ants == -1)
-	{
-		free(data);
-		ft_putstr_fd("ERROR\n", 2);
-		exit(1);
-	}
 	if (data->nb_ants <= 0)
 	{
 		free(data);
@@ -82,20 +76,20 @@ static int	get_nb_ant()
 	i = 0;
 	line = get_next_line(0);
 	if (!line)
-		return (-1);
-	while(line[i] != "\n")
+		return (0);
+	while(line[i] != '\n')
 	{
-		if (line[i] > "9" || line[i] < "0")
+		if (line[i] > '9' || line[i] < '0')
 		{
 			free(line);
-			return (-1);
+			return (0);
 		}
 		i++;
 	}
 	if (i == 0)
 	{
 		free(line);
-		return (-1);
+		return (0);
 	}
 	nb_ant = ft_atoi(line);
 	free(line);
