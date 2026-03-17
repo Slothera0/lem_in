@@ -29,8 +29,13 @@ t_lem_in *read_term()
 		perror("ERROR");
 		exit(1);
 	}
-
 	data->nb_ants = get_nb_ant();
+	if (data->nb_ants == -1)
+	{
+		free(data);
+		ft_putstr_fd("ERROR\n", 2);
+		exit(1);
+	}
 	if (data->nb_ants <= 0)
 	{
 		free(data);
@@ -70,13 +75,29 @@ static t_room_type	set_type(char *line)
 static int	get_nb_ant()
 {
 	char 	*line;
-	int		nb_ant;		
+	int		nb_ant;
+	int 	i;
 
 	nb_ant = -1;
+	i = 0;
 	line = get_next_line(0);
-	if (line)
-		nb_ant = ft_atoi(line);
-
+	if (!line)
+		return (-1);
+	while(line[i] != "\n")
+	{
+		if (line[i] > "9" || line[i] < "0")
+		{
+			free(line);
+			return (-1);
+		}
+		i++;
+	}
+	if (i == 0)
+	{
+		free(line);
+		return (-1);
+	}
+	nb_ant = ft_atoi(line);
 	free(line);
 	return (nb_ant);
 }
