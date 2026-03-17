@@ -136,7 +136,7 @@ static t_room_type parse_nodes(char *line, t_room_type type)
 	char	**split_line = NULL;
 
 	if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
-	line[ft_strlen(line) - 1] = '\0';
+		line[ft_strlen(line) - 1] = '\0';
 	if (!line || line[0] == '\0')
 	{
 		errno = PARSE_ERROR;
