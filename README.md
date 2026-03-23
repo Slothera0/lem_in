@@ -64,3 +64,6 @@ Regles importantes du sujet :
 - en cas d'entree invalide, le programme doit afficher `ERROR`.
 
 
+Au début, queue[0] contient start, donc on commence par traiter start et lire tous ses voisins dans start->links.
+
+Si start est connecté à A et B, alors on marque A et B comme visités, on met leur parent à start, puis on les ajoute à la fin de la queue, dans cet ordre.

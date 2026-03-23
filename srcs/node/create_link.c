@@ -1,5 +1,5 @@
-#include "vector.h"
-#include "node.h"
+#include "../../includes/node.h"
+#include "../../srcs/vector/vector.h"
 #include "libft.h"
 #include "ft_error.h"
 

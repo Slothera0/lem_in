@@ -1,116 +1,90 @@
-#include "lem_in.h"
-#include "node.h"
-#include "vector.h"
-#include <errno.h>
-
+#include "../../includes/lem_in.h"
+#include "../../includes/node.h"
+#include "../../srcs/vector/vector.h"
+#include "../../includes/ft_error.h"
 #include <stdio.h>
 
-char	*get_node_name(t_node *node);
-t_node 	*get_node(t_vector *vector, char *name);
-t_node 	*get_start(t_vector *vector);
-int		ft_error(int statut);
-
-static void		rec_find_all_way(t_vector *current);
-static t_vector *get_unique_links(t_vector *way, t_vector *links);
-
-static t_vector	*all_way;
+void reverse_path(t_vector *path);
+t_vector *rebuild_path(t_node *current);
+void	reset_nodes(t_vector *nodes);
 
 t_vector	*find_all_way(t_lem_in *data)
 {
-	t_vector	*way;
-	t_node		*start;
+	t_node *start;
+	t_node *child;
+	t_vector *queue;
+	t_node *current;
 
-	all_way = vec_create(10);
-	if (!all_way)
-		ft_error(1);
-	
+	unsigned int head;
+
+	reset_nodes(data->node);
 	start = get_start(data->node);
 	if (!start)
 		ft_error(1);
-	way = vec_create(10);
-	if (!way)
-		ft_error(1);
+	start->visited = 1;
+	start->parent = NULL;
+	queue = vec_create(10);
+	queue = vec_append(queue, start);
+	head = 0;
 
-	vec_append(way, start);
-	vec_append(all_way, way);
-	rec_find_all_way(way);
-
-	return (all_way);
-}
-
-static void	rec_find_all_way(t_vector *current)
-{
-	t_node		*current_node;
-	t_vector	*new_way;
-	t_vector	*unique_links;
-
-	printf("Depth: %u, all_way size: %u\n", current->size, all_way->size);
-	current_node = vec_end(current);
-	
-	if (current_node->type == END)
-		return ;
-	
-	unique_links = get_unique_links(current, current_node->links);
-	if (!unique_links)
-		ft_error(1);
-	
-	if (unique_links->size <= 0)
+	while (head < queue->size)
 	{
-		vec_remove(all_way, current);
-		vec_free(current);
-		vec_free(unique_links);
-		return ;
-	}
-
-	for (unsigned int i = 1; i < unique_links->size; i++)
-	{
-		new_way = vec_create(current->size + 1);
-		if (!new_way)
-			ft_error(1);
-		
-		vec_copy(current, new_way);
-
-		new_way = vec_append(new_way, unique_links->array[i]);
-		if (!new_way)
-			ft_error(1);
-		
-		all_way = vec_append(all_way, new_way);
-		if (!all_way)
-			ft_error(1);
-		
-		rec_find_all_way(new_way);
-	}
-
-	vec_remove(all_way, current);
-	current = vec_append(current, unique_links->array[0]);
-	if (!current)
-		ft_error(1);
-
-	all_way = vec_append(all_way, current);
-	if (!all_way)
-		ft_error(1);
-	
-	vec_free(unique_links);
-	rec_find_all_way(current);
-}
-
-static t_vector *get_unique_links(t_vector *way, t_vector *links)
-{
-	t_vector	*unique_links;
-
-	unique_links = vec_create(links->size);
-	if (!unique_links)
-		ft_error(1);
-
-	for (unsigned int i = 0; i < links->size; i++)
-	{
-		if (!get_node(way, get_node_name(links->array[i])))
+		current = (t_node *)queue->array[head];
+		head++;
+		if (current->type == END)
 		{
-			unique_links = vec_append(unique_links, links->array[i]);
-			if (!unique_links)
-				ft_error(1);
+			vec_free(queue);
+			return (rebuild_path(current));
+		}
+		for (unsigned int i = 0; i < current->links->size; i++)
+		{
+			child = (t_node *)current->links->array[i];
+			if (!child->visited)
+			{
+				child->visited = 1;
+				child->parent = current;
+				queue = vec_append(queue, child);
+				if (!queue)
+					return (NULL);
+			}
 		}
 	}
+	return (NULL);
+}
 
-	return (unique_links);
+t_vector *rebuild_path(t_node *current)
+{
+	t_vector *path;
+
+	path = vec_create(10);
+	if (!path)
+		return (NULL);
+	while (current)
+	{
+		path = vec_append(path, current);
+		if (!path)
+			return (NULL);
+		current = current->parent;
+	}
+	reverse_path(path);
+	return (path);
+}
+
+void reverse_path(t_vector *path)
+{
+	void *tmp;
+	unsigned int i;
+	unsigned int j;
+
+	i = 0;
+	j = path->size-1;
+	while (i < j)
+	{
+		tmp = path->array[i];
+		path->array[i] = path->array[j];
+		path->array[j] = tmp;
+		i++;
+		j--;
+	}
+
 }
