@@ -7,25 +7,51 @@
 void reverse_path(t_vector *path);
 t_vector *rebuild_path(t_node *current);
 void	reset_nodes(t_vector *nodes);
+t_vector *find_shortest_path(t_node *start);
+void block_path(t_vector *path);
 
 t_vector	*find_all_way(t_lem_in *data)
 {
 	t_node *start;
-	t_node *child;
-	t_vector *queue;
-	t_node *current;
+	t_vector *path;
+	t_vector *all_path;
+	unsigned int i;
 
-	unsigned int head;
+	i = 0;
+	all_path = vec_create(10);
+	path = vec_create(10);
 
-	reset_nodes(data->node);
 	start = get_start(data->node);
 	if (!start)
 		ft_error(1);
-	start->visited = 1;
-	start->parent = NULL;
+
+	while(i < 5)
+	{
+		printf("%u \n",i);
+		reset_nodes(data->node);
+		start->visited = 1;
+		start->parent = NULL;
+		path = find_shortest_path(start);
+		if (!path)
+			break;
+		all_path = vec_append(all_path, path);
+		block_path(path);
+		reset_nodes(path);
+		i++;
+	}
+	return (all_path);
+}
+
+t_vector *find_shortest_path(t_node *start)
+{
+	t_node *child;
+	t_vector *queue;
+	t_node *current;
+	unsigned int head;
+
+	head = 0;
 	queue = vec_create(10);
 	queue = vec_append(queue, start);
-	head = 0;
 
 	while (head < queue->size)
 	{
@@ -38,8 +64,9 @@ t_vector	*find_all_way(t_lem_in *data)
 		}
 		for (unsigned int i = 0; i < current->links->size; i++)
 		{
+			
 			child = (t_node *)current->links->array[i];
-			if (!child->visited)
+			if (!child->visited && !child->blocked)
 			{
 				child->visited = 1;
 				child->parent = current;

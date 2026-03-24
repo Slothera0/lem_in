@@ -12,6 +12,7 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_SRCS)error.c \
 		$(F_SRCS)print_path.c \
 		$(F_SRCS)print_way.c \
+		$(F_SRCS)print_all_path.c \
 		$(F_NODE)print_node.c $(F_NODE)get_node_name.c $(F_NODE)create_node.c $(F_NODE)create_link.c $(F_NODE)get_node.c  $(F_NODE)free_node.c $(F_NODE)get_start.c $(F_NODE)get_node_type.c $(F_NODE)reset_nodes.c $(F_NODE)block_path.c \
        	$(F_PARSE)read_term.c $(F_PARSE)one_start_end.c $(F_PARSE)is_a_num.c $(F_PARSE)get_nb_ant.c $(F_PARSE)set_type.c \
 		$(F_ALGO)find_all_ways.c

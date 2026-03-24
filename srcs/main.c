@@ -10,7 +10,7 @@ t_vector	*find_all_way(t_lem_in *data);
 void	print_node(void *data);
 void	print_way(void *data);
 t_node 	*get_start(t_vector *vector);
-void print_path(t_vector *path);
+void print_all_path(t_vector *all_path);
 
 int	main()
 {
@@ -29,7 +29,7 @@ int	main()
 	path = find_all_way(data);
 	if (!path)
     	return (1);
-	print_path(path);
+	print_all_path(path);
 
 	// vec_iter(all_way, vec_free);
 	// vec_free(all_way);
