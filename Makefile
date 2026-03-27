@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
-INCLUDES = -I ./includes -I ./srcs/libft -I ./srcs/vector
+INCLUDES = -I ./includes -I ./libs/libft -I ./libs/vector
 
 F_OBJS = .objs/
 F_SRCS = srcs/
@@ -20,10 +20,10 @@ DEPS = $(OBJS:.o=.d)
 
 NAME = lem_in
 
-LIBFT_PATH = ./srcs/libft
+LIBFT_PATH = ./libs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
-VECTOR_PATH = ./srcs/vector
+VECTOR_PATH = ./libs/vector
 VECTOR = $(VECTOR_PATH)/vector.a
 
 TOTAL := $(words $(SRCS))
