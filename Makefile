@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
-INCLUDES = -I ./includes -I ./srcs/libft -I ./srcs/vector
+INCLUDES = -I ./includes -I ./libs/libft -I ./libs/vector
 
 F_OBJS = .objs/
 F_SRCS = srcs/
@@ -12,7 +12,7 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_SRCS)error.c \
 		$(F_SRCS)print_way.c \
 		$(F_NODE)print_node.c $(F_NODE)get_node_name.c $(F_NODE)create_node.c $(F_NODE)create_link.c $(F_NODE)get_node.c  $(F_NODE)free_node.c $(F_NODE)get_start.c $(F_NODE)get_node_type.c \
-       	$(F_PARSE)read_term.c \
+       	$(F_PARSE)read_term.c $(F_PARSE)one_start_end.c $(F_PARSE)is_a_num.c $(F_PARSE)get_nb_ant.c $(F_PARSE)set_type.c \
 		$(F_ALGO)find_all_ways.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
@@ -20,10 +20,10 @@ DEPS = $(OBJS:.o=.d)
 
 NAME = lem_in
 
-LIBFT_PATH = ./srcs/libft
+LIBFT_PATH = ./libs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
-VECTOR_PATH = ./srcs/vector
+VECTOR_PATH = ./libs/vector
 VECTOR = $(VECTOR_PATH)/vector.a
 
 TOTAL := $(words $(SRCS))
