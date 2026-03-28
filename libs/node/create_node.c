@@ -1,7 +1,6 @@
 #include "vector.h"
 #include "node.h"
 #include "libft.h"
-#include "ft_error.h"
 #include <errno.h>
 
 void	free_node(void *data);

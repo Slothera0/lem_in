@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
 LDFLAGS = -lX11 -lGL -lpng -lz -lm
-INCLUDES = -I ./includes -I ../libs/libft -I ../libs/vector
+INCLUDES = -I ./includes -I ../libs/libft -I ../libs/vector -I ../libs/node
 
 F_OBJS = .objs/
 F_SRCS = srcs/
@@ -22,11 +22,8 @@ DEPS = $(OBJS:.o=.d)
 
 NAME = vizualizer
 
-LIBFT_PATH = ../libs/libft
-LIBFT = $(LIBFT_PATH)/libft.a
-
-VECTOR_PATH = ../libs/vector
-VECTOR = $(VECTOR_PATH)/vector.a
+NODE_PATH = ../libs/node
+NODE = $(NODE_PATH)/node.a
 
 TOTAL := $(words $(SRCS))
 COUNT = 0
@@ -41,15 +38,12 @@ all:
 	@echo "$(BLUE)🔧 Compiling $(NAME)...$(RESET)"
 	@$(MAKE) -s $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(VECTOR)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBFT) $(VECTOR) -o $(NAME)
+$(NAME): $(OBJS) $(NODE)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(NODE) -o $(NAME)
 	@echo "$(GREEN)✔ $(NAME) created successfully!$(RESET)"
 
-$(LIBFT):
-	@$(MAKE) -sC $(LIBFT_PATH)
-
-$(VECTOR):
-	@$(MAKE) -sC $(VECTOR_PATH)
+$(NODE):
+	@$(MAKE) -sC $(NODE_PATH)
 
 $(F_OBJS)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -68,15 +62,13 @@ $(F_OBJS)%.o: %.c
 clean:
 	@echo "$(YELLOW)🧹 Cleaning $(NAME) object files...$(RESET)"
 	@rm -rf $(F_OBJS)
-	@$(MAKE) -sC $(LIBFT_PATH) clean
-	@$(MAKE) -sC $(VECTOR_PATH) clean
+	@$(MAKE) -sC $(NODE_PATH) clean
 	@echo "$(GREEN)✔ Clean complete$(RESET)"
 
 fclean: clean
 	@echo "$(YELLOW)🗑 Removing $(NAME)...$(RESET)"
 	@rm -f $(NAME)
-	@$(MAKE) -sC $(LIBFT_PATH) fclean
-	@$(MAKE) -sC $(VECTOR_PATH) fclean
+	@$(MAKE) -sC $(NODE_PATH) fclean
 	@echo "$(GREEN)✔ Full clean complete$(RESET)"
 
 re: fclean all
