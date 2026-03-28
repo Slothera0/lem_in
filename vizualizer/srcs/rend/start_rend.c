@@ -1,12 +1,12 @@
 #include <GL/gl.h>
 #include <unistd.h>
 #include "rend.h"
+#include "lem_in.h"
 
-void clean_rend(t_rend rend);
-void fill_map(t_rend rend);
-void put_node(t_rend rend, float x, float y);
+void	clean_rend(t_rend rend);
+void	load_map(t_rend rend, t_lem_in *data);
 
-int start_rend(t_rend rend)
+int start_rend(t_rend rend, t_lem_in *data)
 {
 	XEvent xev;
 	rend.width = WIDTH;
@@ -22,16 +22,7 @@ int start_rend(t_rend rend)
 				rend.height = xce.height;
 				glViewport(0, 0, rend.width, rend.height);
 
-				glClear(GL_COLOR_BUFFER_BIT);
-
-				glMatrixMode(GL_MODELVIEW);
-				glLoadIdentity();
-
-				if (rend.text.id) {
-					fill_map(rend);
-					put_node(rend, 0.0f, 0.0f);
-				}
-				glXSwapBuffers(rend.dpy, rend.win);
+				load_map(rend, data);
 			}
 
 			if (xev.type == KeyPress) {

@@ -16,10 +16,12 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)clean_rend.c \
 		$(F_REND)fill_map.c \
 		$(F_REND)put_node.c \
+		$(F_REND)load_map.c \
 		$(F_PARSE)read_term.c \
 		$(F_PARSE)one_start_end.c \
 		$(F_PARSE)get_nb_ant.c \
-		$(F_PARSE)set_type.c
+		$(F_PARSE)set_type.c \
+		$(F_PARSE)normalize_coord.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)
