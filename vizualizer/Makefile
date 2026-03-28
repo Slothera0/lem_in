@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
-LDFLAGS = -lX11 -lGL -lpng -lz
+LDFLAGS = -lX11 -lGL -lpng -lz -lm
 INCLUDES = -I ./includes -I ../libs/libft -I ../libs/vector
 
 F_OBJS = .objs/
@@ -14,7 +14,8 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)init_window.c \
 		$(F_REND)load_png_texture.c \
 		$(F_REND)clean_rend.c \
-		$(F_REND)fill_map.c
+		$(F_REND)fill_map.c \
+		$(F_REND)put_node.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

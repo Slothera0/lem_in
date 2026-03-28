@@ -4,6 +4,7 @@
 
 void clean_rend(t_rend rend);
 void fill_map(t_rend rend);
+void put_node(t_rend rend, float x, float y);
 
 int start_rend(t_rend rend)
 {
@@ -28,6 +29,7 @@ int start_rend(t_rend rend)
 
 				if (rend.text.id) {
 					fill_map(rend);
+					put_node(rend, 0.0f, 0.0f);
 				}
 				glXSwapBuffers(rend.dpy, rend.win);
 			}
