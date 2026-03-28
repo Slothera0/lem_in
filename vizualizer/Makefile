@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
 LDFLAGS = -lX11 -lGL -lpng -lz -lm
-INCLUDES = -I ./includes -I ../libs/libft -I ../libs/vector -I ../libs/node
+INCLUDES = -I ./includes -I ../libs/libft -I ../libs/vector -I ../libs/node -I ../includes
 
 F_OBJS = .objs/
 F_SRCS = srcs/
@@ -15,12 +15,16 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)load_png_texture.c \
 		$(F_REND)clean_rend.c \
 		$(F_REND)fill_map.c \
-		$(F_REND)put_node.c
+		$(F_REND)put_node.c \
+		$(F_PARSE)read_term.c \
+		$(F_PARSE)one_start_end.c \
+		$(F_PARSE)get_nb_ant.c \
+		$(F_PARSE)set_type.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)
 
-NAME = vizualizer
+NAME = vizu-hex
 
 NODE_PATH = ../libs/node
 NODE = $(NODE_PATH)/node.a

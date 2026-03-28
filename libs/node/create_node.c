@@ -3,10 +3,6 @@
 #include "libft.h"
 #include <errno.h>
 
-void	free_node(void *data);
-t_node	*get_node(t_vector *vector, char *name);
-int		is_a_num(char *str);
-
 t_vector *create_node(t_vector *nodes, char **args, t_room_type type)
 {
 	t_node	*new;

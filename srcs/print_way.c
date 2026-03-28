@@ -2,8 +2,6 @@
 #include "node.h"
 #include "ft_printf.h"
 
-char *get_node_name(t_node *node);
-
 void	print_way(void *data)
 {
 	t_vector *vector = (t_vector *)data;

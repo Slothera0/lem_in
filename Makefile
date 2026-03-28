@@ -10,7 +10,7 @@ F_ALGO = $(F_SRCS)algo/
 SRCS = 	$(F_SRCS)main.c \
 		$(F_SRCS)error.c \
 		$(F_SRCS)print_way.c \
-		$(F_PARSE)read_term.c $(F_PARSE)one_start_end.c $(F_PARSE)is_a_num.c $(F_PARSE)get_nb_ant.c $(F_PARSE)set_type.c \
+		$(F_PARSE)read_term.c $(F_PARSE)one_start_end.c $(F_PARSE)get_nb_ant.c $(F_PARSE)set_type.c \
 		$(F_ALGO)find_all_ways.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
@@ -18,14 +18,10 @@ DEPS = $(OBJS:.o=.d)
 
 NAME = lem_in
 
-LIBFT_PATH = ./libs/libft
-LIBFT = $(LIBFT_PATH)/libft.a
-
-VECTOR_PATH = ./libs/vector
-VECTOR = $(VECTOR_PATH)/vector.a
-
 NODE_PATH = ./libs/node
 NODE = $(NODE_PATH)/node.a
+
+VIZUALIZER = ./vizualizer
 
 TOTAL := $(words $(SRCS))
 COUNT = 0
@@ -65,16 +61,21 @@ clean:
 	@echo "$(YELLOW)🧹 Cleaning $(NAME) object files...$(RESET)"
 	@rm -rf $(F_OBJS)
 	@$(MAKE) -sC $(NODE_PATH) clean
+	@$(MAKE) -sC $(VIZUALIZER) clean
 	@echo "$(GREEN)✔ Clean complete$(RESET)"
 
 fclean: clean
 	@echo "$(YELLOW)🗑 Removing $(NAME)...$(RESET)"
 	@rm -f $(NAME)
 	@$(MAKE) -sC $(NODE_PATH) fclean
+	@$(MAKE) -sC $(VIZUALIZER) fclean
 	@echo "$(GREEN)✔ Full clean complete$(RESET)"
 
 re: fclean all
 
+bonus: all
+	@$(MAKE) -sC $(VIZUALIZER)
+
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

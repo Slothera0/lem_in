@@ -55,7 +55,8 @@ ft_strcmp.c \
 ft_printf.c \
 ft_putchar.c \
 ft_putnbr_base.c \
-ft_putstr.c
+ft_putstr.c \
+is_a_num.c 
 
 OBJS = $(SOURCES:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

@@ -2,8 +2,6 @@
 #include "node.h"
 #include "libft.h"
 
-t_node *get_node(t_vector *vector, char *name);
-
 int create_link(t_vector *nodes, char *args)
 {
 	char **split = ft_split(args, '-');

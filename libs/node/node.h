@@ -28,4 +28,14 @@ typedef struct s_node
 	t_room_type 	type;
 } t_node ;
 
+t_node		*get_node(t_vector *vector, char *name);
+int 		create_link(t_vector *nodes, char *args);
+void		free_node(void *data);
+t_vector	*create_node(t_vector *nodes, char **args, t_room_type type);
+void		free_node(void *data);
+char 		*get_node_name(t_node *node);
+t_room_type get_node_type(t_node *node);
+t_node		*get_start(t_vector *vector);
+void		print_node(void *data);
+
 #endif

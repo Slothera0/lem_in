@@ -5,10 +5,8 @@
 #include <errno.h>
 
 t_lem_in	*read_term();
-void		free_node(void *data);
 t_vector	*find_all_way(t_lem_in *data);
 
-void	print_node(void *data);
 void	print_way(void *data);
 t_node 	*get_start(t_vector *vector);
 
