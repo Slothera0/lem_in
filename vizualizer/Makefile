@@ -9,7 +9,12 @@ F_PARSE = $(F_SRCS)parse/
 F_REND = $(F_SRCS)rend/
 
 SRCS = 	$(F_SRCS)main.c \
-		$(F_REND)start_rend.c $(F_REND)init_visual.c $(F_REND)init_window.c $(F_REND)load_png_texture.c $(F_REND)clean_rend.c 
+		$(F_REND)start_rend.c \
+		$(F_REND)init_visual.c \
+		$(F_REND)init_window.c \
+		$(F_REND)load_png_texture.c \
+		$(F_REND)clean_rend.c \
+		$(F_REND)fill_map.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

@@ -3,6 +3,9 @@
 
 # include <GL/glx.h>
 
+# define HEIGHT 600
+# define WIDTH 800
+
 typedef struct s_texture
 {
 	GLuint id;
@@ -18,6 +21,8 @@ typedef struct s_rend
 	t_texture text;
 	Colormap cmap;
 	XVisualInfo *vi;
+	int height;
+	int width;
 }	t_rend;
 
 #endif

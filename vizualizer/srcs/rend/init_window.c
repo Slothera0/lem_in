@@ -30,7 +30,7 @@ int init_window(t_rend *rend_adr)
 	swa.colormap = rend.cmap;
 	swa.event_mask = ExposureMask | KeyPressMask | StructureNotifyMask;
 
-	rend.win = XCreateWindow(rend.dpy, RootWindow(rend.dpy, screen), 0, 0, 800, 600, 0, rend.vi->depth, InputOutput, rend.vi->visual, CWColormap | CWEventMask, &swa);
+	rend.win = XCreateWindow(rend.dpy, RootWindow(rend.dpy, screen), 0, 0, WIDTH, HEIGHT, 0, rend.vi->depth, InputOutput, rend.vi->visual, CWColormap | CWEventMask, &swa);
 	XStoreName(rend.dpy, rend.win, "lem_in Visualizer");
 	XMapWindow(rend.dpy, rend.win);
 
@@ -52,6 +52,8 @@ int init_window(t_rend *rend_adr)
 	if (!rend.text.id)
 		fprintf(stderr, "warning: could not load dirt.png\n");
 
+	rend.text.width = 100;
+	rend.text.height = 100;
 	*rend_adr = rend;
 	return (0);
 }

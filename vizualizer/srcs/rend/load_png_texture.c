@@ -92,6 +92,5 @@ GLuint load_png_texture(const char *path, int *out_w, int *out_h)
 		*out_w = width;
 	if (out_h)
 		*out_h = height;
-
 	return (tex);
 }
