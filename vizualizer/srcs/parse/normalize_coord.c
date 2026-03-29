@@ -27,13 +27,27 @@ float	normalize_coord(t_vector *nodes)
 
 	float range_x = max_x - min_x;
 	float range_y = max_y - min_y;
+	float margin_left = 0.10f;
+	float margin_right = 0.10f;
+	float margin_bottom = 0.10f;
+	float margin_top = 0.20f;
+	float scale_x = 1.0f - margin_left - margin_right;
+	float scale_y = 1.0f - margin_bottom - margin_top;
+
+	if (range_x == 0.0f)
+		range_x = 1.0f;
+	if (range_y == 0.0f)
+		range_y = 1.0f;
 
 	for (unsigned int i = 0; i < nodes->size; i++)
 	{
 		t_node *node = nodes->array[i];
-		node->x = ((node->x - min_x) / range_x) * 1.50 - 0.75;
-		node->y = ((node->y - min_y) / range_y) * 1.50 - 0.75;
+		float nx = (node->x - min_x) / range_x;
+		float ny = (node->y - min_y) / range_y;
+
+		node->x = (nx * scale_x + margin_left) * 2.0f - 1.0f;
+		node->y = (ny * scale_y + margin_bottom) * 2.0f - 1.0f;
 	}
 
-	return (1.50 / (range_x > range_y ? range_x : range_y));
+	return (range_x > range_y) ? range_x : range_y;
 }
