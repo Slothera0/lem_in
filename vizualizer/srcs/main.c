@@ -4,7 +4,7 @@
 #include "vector.h"
 
 t_lem_in	*read_term();
-void		normalize_coord(t_vector *nodes);
+float		normalize_coord(t_vector *nodes);
 
 int init_window(t_rend *rend_adr);
 int start_rend(t_rend rend, t_lem_in *data);
@@ -19,7 +19,6 @@ int main()
 	nodes = data->node;
 
 	normalize_coord(nodes);
-	vec_iter(nodes, print_node);
 	
 	t_rend rend;
 

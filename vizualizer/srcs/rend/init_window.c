@@ -34,6 +34,14 @@ int init_window(t_rend *rend_adr)
 	XStoreName(rend.dpy, rend.win, "lem_in Visualizer");
 	XMapWindow(rend.dpy, rend.win);
 
+	XSizeHints hints;
+	hints.min_width = 480;
+	hints.min_height = 360;
+	hints.max_width = 1920;
+	hints.max_height = 1080;
+	hints.flags = PMinSize | PMaxSize;
+	XSetWMNormalHints(rend.dpy, rend.win, &hints);
+
 	rend.ctx = glXCreateContext(rend.dpy, rend.vi, NULL, GL_TRUE);
 	if (!rend.ctx) {
 		fprintf(stderr, "Failed to create GLX context\n");
