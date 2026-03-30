@@ -21,6 +21,11 @@ t_distrib_ants *distrib_ants(t_lem_in *data, t_vector *all_path) {
   for (unsigned int ant = 0; ant < data->nb_ants; ant++) {
     best_cost = INT_MAX;
     index_path = 0;
+    if (all_path->size == 0)
+    {
+      free(distrib);
+      return (NULL);
+    }
     for (unsigned int i = 0; i < all_path->size; i++) {
         path = (t_vector *)all_path->array[i];
         cost_path = path->size + get_ants_path(distrib, ant, i);
