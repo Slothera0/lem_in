@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 void print_ant_move(int ant_id, const char *room_name);
+int room_is_empty(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *room);
 
 int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
 {
@@ -32,15 +33,19 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
                 continue;
             
             if(distrib[i].path_step + 1 >= path->size)
-            {
-                distrib[i].arrived = 1;
-                finish_count++;
                 continue;
-            }
             room = (t_node *)path->array[distrib[i].path_step + 1];
-            print_ant_move(distrib[i].ants_id, room->name);
-            distrib[i].path_step += 1;
-            move = 1;
+            if (room->type == END || room_is_empty(distrib, assigned_ants, room) == 1)
+            {
+                print_ant_move(distrib[i].ants_id, room->name);
+                distrib[i].path_step += 1;
+                move = 1;
+                if (distrib[i].path_step + 1 >= path->size)
+                {
+                    distrib[i].arrived = 1;
+                    finish_count++;
+                }
+            }
         }
         if (move)
         {
@@ -49,6 +54,24 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
 
     }
     return 0;
+}
+
+int room_is_empty(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *room)
+{
+    t_vector *path;
+    t_node *compare_room;
+
+    for(unsigned int i = 0; i < assigned_ants; i++)
+    {
+        if(!distrib[i].arrived && distrib[i].path_step > 0)
+        {
+            path = distrib[i].path;
+            compare_room = (t_node *)path->array[distrib[i].path_step];
+            if (room == compare_room)
+                return (0);
+        }
+    }
+    return (1);
 }
 
 void print_ant_move(int ant_id, const char *room_name)
