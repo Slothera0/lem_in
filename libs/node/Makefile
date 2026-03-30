@@ -12,7 +12,9 @@ SOURCES = 	create_link.c \
 			get_node_name.c \
 			get_node_type.c \
 			get_start.c \
-			print_node.c
+			print_node.c \
+			get_x.c \
+			get_y.c
 
 LIBFT_PATH = ../libft
 LIBFT = $(LIBFT_PATH)/libft.a

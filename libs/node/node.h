@@ -23,8 +23,8 @@ typedef struct s_node
 {
 	char 			*name;
 	t_vector 		*links;
-	int 			x;
-	int 			y;
+	float 			x;
+	float 			y;
 	t_room_type 	type;
 } t_node ;
 
@@ -37,5 +37,7 @@ char 		*get_node_name(t_node *node);
 t_room_type get_node_type(t_node *node);
 t_node		*get_start(t_vector *vector);
 void		print_node(void *data);
+float		get_x(t_node *node);
+float		get_y(t_node *node);
 
 #endif

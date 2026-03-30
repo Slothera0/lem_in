@@ -18,9 +18,9 @@ int main()
 
 	nodes = data->node;
 
-	normalize_coord(nodes);
-	
 	t_rend rend;
+
+	rend.range = normalize_coord(nodes);
 
 	if (init_window(&rend) != 0)
 	{

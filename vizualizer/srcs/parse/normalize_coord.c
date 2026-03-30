@@ -49,5 +49,5 @@ float	normalize_coord(t_vector *nodes)
 		node->y = (ny * scale_y + margin_bottom) * 2.0f - 1.0f;
 	}
 
-	return (range_x > range_y) ? range_x : range_y;
+	return ((range_x > range_y) ? range_x : range_y);
 }

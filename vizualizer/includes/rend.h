@@ -23,6 +23,7 @@ typedef struct s_rend
 	XVisualInfo *vi;
 	int height;
 	int width;
+	float range;
 }	t_rend;
 
 #endif

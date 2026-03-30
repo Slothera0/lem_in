@@ -6,7 +6,7 @@ void	print_node(void *data)
 {
 	t_node *node = (t_node *)data;
 
-	ft_printf("node \"%s\" : %d:%d\n", node->name, node->x, node->y);
+	ft_printf("node \"%s\" : %d:%d\n", node->name, (int)get_x(node), (int)get_y(node));
 	
 	switch (node->type)
 	{
