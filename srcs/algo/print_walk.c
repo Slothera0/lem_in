@@ -19,16 +19,58 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
 
     while(finish_count < assigned_ants)
     {
+        unsigned int max_step;
+
+        max_step = 0;
         move = 0;
+        for (unsigned int i = 0; i < assigned_ants; i++)
+        {
+            if (distrib[i].path && distrib[i].path->size > max_step)
+                max_step = distrib[i].path_step;
+        }
+        for (unsigned int step = max_step; step > 0; step--)
+        {
+            
+            for (unsigned int i = 0; i < assigned_ants; i++)
+            {
+                t_vector *path;
+                t_node *room;
+
+                if(distrib[i].arrived || !distrib[i].path)
+                    continue;
+                if(distrib[i].path_step != step)
+                    continue;
+                path = distrib[i].path;
+
+                if(!path || path->size == 0)
+                    continue;
+                
+                if(distrib[i].path_step + 1 >= path->size)
+                    continue;
+                room = (t_node *)path->array[distrib[i].path_step + 1];
+                if (room->type == END || room_is_empty(distrib, assigned_ants, room) == 1)
+                {
+                    print_ant_move(distrib[i].ants_id, room->name);
+                    distrib[i].path_step += 1;
+                    move = 1;
+                    if (distrib[i].path_step + 1 >= path->size)
+                    {
+                        distrib[i].arrived = 1;
+                        finish_count++;
+                    }
+                }
+            }
+            
+        }
+
         for (unsigned int i = 0; i < assigned_ants; i++)
         {
             t_vector *path;
             t_node *room;
 
-            if(distrib[i].arrived)
+            if(distrib[i].arrived || !distrib[i].path)
                 continue;
             path = distrib[i].path;
-
             if(!path || path->size == 0)
                 continue;
             
@@ -48,10 +90,9 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
             }
         }
         if (move)
-        {
-            printf("\n");
-        }
-
+            {
+                printf("\n");
+            }
     }
     return 0;
 }
@@ -60,6 +101,12 @@ int room_is_empty(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *r
 {
     t_vector *path;
     t_node *compare_room;
+
+    if(!room)
+        return (0);
+    if (room->type == START || room->type == END)
+        return (1);
+
 
     for(unsigned int i = 0; i < assigned_ants; i++)
     {
