@@ -126,26 +126,3 @@ void print_ant_move(int ant_id, const char *room_name)
     printf("L%d-%s ",ant_id,room_name);
 }
 
-int room_is_empt(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *room)
-{
-    t_vector *path;
-    t_node *compare_room;
-
-    if(!room)
-        return (0);
-    if (room->type == START || room->type == END)
-        return (1);
-
-
-    for(unsigned int i = 0; i < assigned_ants; i++)
-    {
-        if(!distrib[i].arrived && distrib[i].path_step > 0)
-        {
-            path = distrib[i].path;
-            compare_room = (t_node *)path->array[distrib[i].path_step];
-            if (room == compare_room)
-                return (0);
-        }
-    }
-    return (1);
-}
