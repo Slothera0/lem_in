@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void print_ant_move(int ant_id, const char *room_name);
+void print_ant_move(unsigned int ant_id, const char *room_name);
 int room_is_empty(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *room);
 
 int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
@@ -25,7 +25,7 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
         move = 0;
         for (unsigned int i = 0; i < assigned_ants; i++)
         {
-            if (distrib[i].path && distrib[i].path->size > max_step)
+            if (distrib[i].path && !distrib[i].arrived && distrib[i].path_step > max_step)
                 max_step = distrib[i].path_step;
         }
         for (unsigned int step = max_step; step > 0; step--)
@@ -76,6 +76,8 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
             
             if(distrib[i].path_step + 1 >= path->size)
                 continue;
+            if (distrib[i].path_step != 0)
+                continue;
             room = (t_node *)path->array[distrib[i].path_step + 1];
             if (room->type == END || room_is_empty(distrib, assigned_ants, room) == 1)
             {
@@ -90,12 +92,14 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
             }
         }
         if (move)
-            {
-                printf("\n");
-            }
+            printf("\n");
+        else
+            break;
     }
     return 0;
 }
+
+
 
 int room_is_empty(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *room)
 {
@@ -110,7 +114,7 @@ int room_is_empty(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *r
 
     for(unsigned int i = 0; i < assigned_ants; i++)
     {
-        if(!distrib[i].arrived && distrib[i].path_step > 0)
+        if(!distrib[i].arrived && distrib[i].path && distrib[i].path_step > 0)
         {
             path = distrib[i].path;
             compare_room = (t_node *)path->array[distrib[i].path_step];
@@ -121,8 +125,8 @@ int room_is_empty(t_distrib_ants *distrib, unsigned int assigned_ants, t_node *r
     return (1);
 }
 
-void print_ant_move(int ant_id, const char *room_name)
+void print_ant_move(unsigned int ant_id, const char *room_name)
 {
-    printf("L%d-%s ",ant_id,room_name);
+    printf("L%u-%s ",ant_id,room_name);
 }
 

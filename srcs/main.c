@@ -33,6 +33,7 @@ int	main()
 	path = find_all_way(data);
 	if (!path)
     	return (1);
+	
 	distrib = distrib_ants(data, path);
 	if (!distrib)
         return (1);
