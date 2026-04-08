@@ -39,5 +39,9 @@ t_node		*get_start(t_vector *vector);
 void		print_node(void *data);
 float		get_x(t_node *node);
 float		get_y(t_node *node);
+float		get_minX_coord(t_vector *nodes);
+float		get_maxX_coord(t_vector *nodes);
+float		get_minY_coord(t_vector *nodes);
+float		get_maxY_coord(t_vector *nodes);
 
 #endif

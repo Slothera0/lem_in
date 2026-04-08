@@ -3,6 +3,9 @@
 #include "node.h"
 #include "vector.h"
 
+
+#include <stdio.h>
+
 t_lem_in	*read_term();
 float		normalize_coord(t_vector *nodes);
 
@@ -20,7 +23,7 @@ int main()
 
 	t_rend rend;
 
-	rend.range = normalize_coord(nodes);
+	rend.scale = 10 / normalize_coord(nodes);
 
 	if (init_window(&rend) != 0)
 	{

@@ -8,7 +8,7 @@ GLuint 		load_png_texture(const char *path, int *out_w, int *out_h);
 
 int init_window(t_rend *rend_adr)
 {
-	t_rend rend;
+	t_rend rend = *rend_adr;
 	
 	rend.dpy = XOpenDisplay(NULL);
 	if (!rend.dpy) {

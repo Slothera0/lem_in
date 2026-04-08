@@ -4,7 +4,8 @@
 #include "node.h"
 
 void	fill_map(t_rend rend);
-void	put_node(t_rend rend, float x, float y);
+void	put_node(t_rend *rend, float x, float y);
+void	put_link(t_rend rend, float x1, float y1, float x2, float y2);
 
 void	load_map(t_rend rend, t_lem_in *data)
 {
@@ -22,7 +23,17 @@ void	load_map(t_rend rend, t_lem_in *data)
 	for (unsigned int i = 0; i < nodes->size; i++)
 	{
 		t_node *node = nodes->array[i];
-		put_node(rend, (float)node->x, (float)node->y);
+		put_node(&rend, (float)node->x, (float)node->y);
+	}
+
+	for (unsigned int i = 0; i < nodes->size; i++)
+	{
+		t_node *node = nodes->array[i];
+		for (unsigned int j = 0; j < node->links->size; j++)
+		{
+			t_node *linked_node = node->links->array[j];
+			put_link(rend, node->x, node->y, linked_node->x, linked_node->y);
+		}
 	}
 
 	glXSwapBuffers(rend.dpy, rend.win);

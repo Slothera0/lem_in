@@ -4,15 +4,18 @@
 #define M_PI (3.14159265358979323846264338327950288)
 #endif
 
-void put_node(t_rend rend, float x, float y)
+#include <stdio.h>
+
+void put_node(t_rend *rend, float x, float y)
 {	
 	glEnable(GL_BLEND); 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	int segments = 32;
-	float size_px = (rend.width > rend.height ? rend.height : rend.width) / rend.range;
-	float rx = (size_px / rend.width) * 2.0f;
-	float ry = (size_px / rend.height) * 2.0f;
+	float size_px = (rend->width > rend->height ? rend->height : rend->width) * 0.07f * rend->scale;
+	float rx = (size_px / rend->width) * 2.0f;
+	float ry = (size_px / rend->height) * 2.0f;
+	rend->circle_size = size_px;
 
 	glColor4f(0.1f, 0.0f, 0.0f, 0.6f);
 	glDepthMask(GL_FALSE);

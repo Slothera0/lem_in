@@ -11,6 +11,7 @@ int			one_end(t_vector *nodes);
 int			one_start(t_vector *nodes);
 t_room_type	set_type(char *line);
 int			get_nb_ant();
+int			check_coords(t_vector *nodes);
 
 static void			parse_data();
 static t_room_type 	parse_nodes(char *line, t_room_type type);
@@ -53,6 +54,15 @@ t_lem_in *read_term()
 	}
 	
 	if (!one_start(nodes) || !one_end(nodes))
+	{
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
+		ft_putstr_fd("ERROR\n", 2);
+		exit(1);
+	}
+
+	if (!check_coords(nodes))
 	{
 		vec_iter(nodes, free_node);
 		vec_free(nodes);

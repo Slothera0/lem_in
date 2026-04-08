@@ -5,6 +5,7 @@
 
 # define HEIGHT 600
 # define WIDTH 800
+# define MAX_COORD 50.0f
 
 typedef struct s_texture
 {
@@ -23,7 +24,8 @@ typedef struct s_rend
 	XVisualInfo *vi;
 	int height;
 	int width;
-	float range;
+	float scale;
+	float circle_size;
 }	t_rend;
 
 #endif
