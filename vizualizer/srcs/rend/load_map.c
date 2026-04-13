@@ -11,10 +11,11 @@ void	put_ant(t_rend rend, float x, float y);
 void	load_map(t_rend rend, t_lem_in *data)
 {
 	glClearColor(BACKGROUND_COLOR);
-
+	glClear(GL_COLOR_BUFFER_BIT);
+	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
+	
 	// if (rend.text.id)
 	// {
  	// 	fill_map(rend);
