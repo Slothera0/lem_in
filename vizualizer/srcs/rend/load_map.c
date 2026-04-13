@@ -6,6 +6,7 @@
 void	fill_map(t_rend rend);
 void	put_node(t_rend *rend, float x, float y);
 void	put_link(t_rend rend, float x1, float y1, float x2, float y2);
+void	put_ant(t_rend rend, float x, float y);
 
 void	load_map(t_rend rend, t_lem_in *data)
 {
@@ -16,7 +17,8 @@ void	load_map(t_rend rend, t_lem_in *data)
 
 	if (rend.text.id)
 	{
-		fill_map(rend);
+		glClearColor(BACKGROUND_COLOR);
+		//fill_map(rend);
 	}
 
 	t_vector *nodes = data->node;
@@ -35,6 +37,9 @@ void	load_map(t_rend rend, t_lem_in *data)
 			put_link(rend, node->x, node->y, linked_node->x, linked_node->y);
 		}
 	}
+
+	t_node *start_node = nodes->array[0];
+	put_ant(rend, start_node->x, start_node->y); // TODO: positionner les fourmis correctement
 
 	glXSwapBuffers(rend.dpy, rend.win);
 }
