@@ -10,29 +10,28 @@ int init_window(t_rend *rend_adr)
 {
 	t_rend rend = *rend_adr;
 	
-	rend.dpy = XOpenDisplay(NULL);
-	if (!rend.dpy) {
+	rend.data.dpy = XOpenDisplay(NULL);
+	if (!rend.data.dpy) {
 		fprintf(stderr, "Could not open display\n");
 		return (1);
 	}
 
-	int screen = DefaultScreen(rend.dpy);
+	int screen = DefaultScreen(rend.data.dpy);
 
-	rend.vi = init_visual(rend.dpy, screen);
+	rend.vi = init_visual(rend.data.dpy, screen);
 	if (!rend.vi) {
-		XCloseDisplay(rend.dpy);
+		XCloseDisplay(rend.data.dpy);
 		return (1);
 	}
 
-	rend.cmap = XCreateColormap(rend.dpy, RootWindow(rend.dpy, screen), rend.vi->visual, AllocNone);
-
+	rend.data.cmap = XCreateColormap(rend.data.dpy, RootWindow(rend.data.dpy, screen), rend.vi->visual, AllocNone);
 	XSetWindowAttributes swa;
-	swa.colormap = rend.cmap;
+	swa.colormap = rend.data.cmap;
 	swa.event_mask = ExposureMask | KeyPressMask | StructureNotifyMask;
 
-	rend.win = XCreateWindow(rend.dpy, RootWindow(rend.dpy, screen), 0, 0, WIDTH, HEIGHT, 0, rend.vi->depth, InputOutput, rend.vi->visual, CWColormap | CWEventMask, &swa);
-	XStoreName(rend.dpy, rend.win, "Lrio-min");
-	XMapWindow(rend.dpy, rend.win);
+	rend.data.win = XCreateWindow(rend.data.dpy, RootWindow(rend.data.dpy, screen), 0, 0, WIDTH, HEIGHT, 0, rend.vi->depth, InputOutput, rend.vi->visual, CWColormap | CWEventMask, &swa);
+	XStoreName(rend.data.dpy, rend.data.win, WINDOW_TITLE);
+	XMapWindow(rend.data.dpy, rend.data.win);
 
 	XSizeHints hints;
 	hints.min_width = 480;
@@ -40,18 +39,18 @@ int init_window(t_rend *rend_adr)
 	hints.max_width = 1920;
 	hints.max_height = 1080;
 	hints.flags = PMinSize | PMaxSize;
-	XSetWMNormalHints(rend.dpy, rend.win, &hints);
+	XSetWMNormalHints(rend.data.dpy, rend.data.win, &hints);
 
-	rend.ctx = glXCreateContext(rend.dpy, rend.vi, NULL, GL_TRUE);
-	if (!rend.ctx) {
+	rend.data.ctx = glXCreateContext(rend.data.dpy, rend.vi, NULL, GL_TRUE);
+	if (!rend.data.ctx) {
 		fprintf(stderr, "Failed to create GLX context\n");
-		XDestroyWindow(rend.dpy, rend.win);
-		XFreeColormap(rend.dpy, rend.cmap);
+		XDestroyWindow(rend.data.dpy, rend.data.win);
+		XFreeColormap(rend.data.dpy, rend.data.cmap);
 		XFree(rend.vi);
-		XCloseDisplay(rend.dpy);
+		XCloseDisplay(rend.data.dpy);
 		return (1);
 	}
-	glXMakeCurrent(rend.dpy, rend.win, rend.ctx);
+	glXMakeCurrent(rend.data.dpy, rend.data.win, rend.data.ctx);
 
 	//glDisable(GL_DEPTH_TEST); // tester de le desactiver plus tard
 

@@ -9,6 +9,14 @@ F_PARSE = $(F_SRCS)parse/
 F_REND = $(F_SRCS)rend/
 
 SRCS = 	$(F_SRCS)main.c \
+		$(F_PARSE)read_term.c \
+		$(F_PARSE)one_start_end.c \
+		$(F_PARSE)get_nb_ant.c \
+		$(F_PARSE)set_type.c \
+		$(F_PARSE)normalize_coord.c \
+		$(F_PARSE)check_coords.c \
+		$(F_PARSE)read_ants_path.c \
+		$(F_PARSE)create_path.c \
 		$(F_REND)start_rend.c \
 		$(F_REND)init_visual.c \
 		$(F_REND)init_window.c \
@@ -17,16 +25,9 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)fill_map.c \
 		$(F_REND)put_node.c \
 		$(F_REND)load_map.c \
-		$(F_PARSE)read_term.c \
-		$(F_PARSE)one_start_end.c \
-		$(F_PARSE)get_nb_ant.c \
-		$(F_PARSE)set_type.c \
-		$(F_PARSE)normalize_coord.c \
-		$(F_PARSE)check_coords.c \
 		$(F_REND)put_link.c \
 		$(F_REND)put_ant.c \
-		$(F_PARSE)read_ants_path.c \
-		$(F_PARSE)create_path.c
+		$(F_REND)ants_movements.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

@@ -5,6 +5,8 @@
 
 # include "vector.h"
 
+# define WINDOW_TITLE "Lrio-min"
+
 # define HEIGHT 600
 # define WIDTH 800
 # define MAX_COORD 50.0f
@@ -19,15 +21,20 @@ typedef struct s_texture
 	int height;
 }	t_texture;
 
-typedef struct s_rend
+typedef struct s_data_gl
 {
 	Display *dpy;
 	Window win;
 	GLXContext ctx;
+	Colormap cmap;
+} t_data_gl;
+
+typedef struct s_rend
+{
+	t_data_gl data;
+	XVisualInfo *vi;
 	t_texture text;
 	t_texture ant_text;
-	Colormap cmap;
-	XVisualInfo *vi;
 	int height;
 	int width;
 	float scale;

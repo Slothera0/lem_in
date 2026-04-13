@@ -10,16 +10,15 @@ void	put_ant(t_rend rend, float x, float y);
 
 void	load_map(t_rend rend, t_lem_in *data)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(BACKGROUND_COLOR);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	if (rend.text.id)
-	{
-		glClearColor(BACKGROUND_COLOR);
-		//fill_map(rend);
-	}
+	// if (rend.text.id)
+	// {
+ 	// 	fill_map(rend);
+	// }
 
 	t_vector *nodes = data->node;
 	for (unsigned int i = 0; i < nodes->size; i++)
@@ -41,5 +40,5 @@ void	load_map(t_rend rend, t_lem_in *data)
 	t_node *start_node = nodes->array[0];
 	put_ant(rend, start_node->x, start_node->y); // TODO: positionner les fourmis correctement
 
-	glXSwapBuffers(rend.dpy, rend.win);
+	glXSwapBuffers(rend.data.dpy, rend.data.win);
 }

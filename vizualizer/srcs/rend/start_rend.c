@@ -5,6 +5,7 @@
 
 void	clean_rend(t_rend rend);
 void	load_map(t_rend rend, t_lem_in *data);
+void	ants_movements(t_rend rend);
 
 int start_rend(t_rend rend, t_lem_in *data)
 {
@@ -14,8 +15,8 @@ int start_rend(t_rend rend, t_lem_in *data)
 
 	while (1) 
 	{
-		while (XPending(rend.dpy)) {
-			XNextEvent(rend.dpy, &xev);
+		while (XPending(rend.data.dpy)) {
+			XNextEvent(rend.data.dpy, &xev);
 			if (xev.type == ConfigureNotify) {
 				XConfigureEvent xce = xev.xconfigure;
 				rend.width = xce.width;
@@ -35,6 +36,7 @@ int start_rend(t_rend rend, t_lem_in *data)
 			}
 		}
 
+		ants_movements(rend);
 		
 		usleep(16000); // environ 60 FPS
 	}
