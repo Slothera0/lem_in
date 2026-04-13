@@ -9,10 +9,9 @@
 void put_node(t_rend *rend, float x, float y)
 {
 	int segments = 32;
-	float size_px = (rend->width > rend->height ? rend->height : rend->width) * 0.07f * rend->scale;
+	float size_px = (rend->width > rend->height ? rend->height : rend->width) * 0.7f * rend->scale;
 	float rx = (size_px / rend->width) * 2.0f;
 	float ry = (size_px / rend->height) * 2.0f;
-	rend->circle_size = rend->scale * 0.07f;
 
 	glColor4f(NODE_COLOR);
 	glBegin(GL_TRIANGLE_FAN);

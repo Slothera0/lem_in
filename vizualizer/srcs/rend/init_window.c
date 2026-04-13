@@ -53,7 +53,7 @@ int init_window(t_rend *rend_adr)
 	}
 	glXMakeCurrent(rend.dpy, rend.win, rend.ctx);
 
-	glDisable(GL_DEPTH_TEST); // tester de le desactiver plus tard
+	//glDisable(GL_DEPTH_TEST); // tester de le desactiver plus tard
 
 
 	rend.text.id = load_png_texture("textures/dirt.png", &rend.text.width, &rend.text.height);
@@ -63,9 +63,9 @@ int init_window(t_rend *rend_adr)
 	rend.text.width = 100;
 	rend.text.height = 100;
 
-	rend.ant_text.id = load_png_texture("textures/loic.png", &rend.ant_text.width, &rend.ant_text.height);
+	rend.ant_text.id = load_png_texture("textures/lrio.png", &rend.ant_text.width, &rend.ant_text.height);
 	if (!rend.ant_text.id)
-		fprintf(stderr, "warning: could not load loic.png\n");
+		fprintf(stderr, "warning: could not load lrio.png\n");
 	rend.ant_text.width = 1;
 	rend.ant_text.height = 1;
 

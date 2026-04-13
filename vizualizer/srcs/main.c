@@ -23,7 +23,7 @@ int main()
 
 	t_rend rend;
 
-	rend.scale = 10 / normalize_coord(nodes);
+	rend.scale = 1 / normalize_coord(nodes);
 
 	if (init_window(&rend) != 0)
 	{

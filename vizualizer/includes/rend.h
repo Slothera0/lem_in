@@ -29,7 +29,6 @@ typedef struct s_rend
 	int height;
 	int width;
 	float scale;
-	float circle_size;
 }	t_rend;
 
 #endif
