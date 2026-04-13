@@ -8,6 +8,7 @@
 
 t_lem_in	*read_term();
 float		normalize_coord(t_vector *nodes);
+t_vector	*read_ants_path();
 
 int init_window(t_rend *rend_adr);
 int start_rend(t_rend rend, t_lem_in *data);
@@ -22,6 +23,16 @@ int main()
 	nodes = data->node;
 
 	t_rend rend;
+
+	rend.ant_paths = read_ants_path();
+	if (!rend.ant_paths)
+	{
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
+		perror("ERROR");
+		exit(1);
+	}
 
 	rend.scale = 1 / normalize_coord(nodes);
 

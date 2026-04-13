@@ -167,6 +167,5 @@ static void	parse_link(char *line)
 	else if (ret == PARSE_ERROR)
 	{
 		errno = PARSE_ERROR;
-		get_next_line(-1);
 	}
 }

@@ -3,6 +3,8 @@
 
 # include <GL/glx.h>
 
+# include "vector.h"
+
 # define HEIGHT 600
 # define WIDTH 800
 # define MAX_COORD 50.0f
@@ -29,6 +31,13 @@ typedef struct s_rend
 	int height;
 	int width;
 	float scale;
+	t_vector *ant_paths;
 }	t_rend;
+
+typedef struct s_path
+{
+	int ant;
+	char *node;
+}	t_path;
 
 #endif

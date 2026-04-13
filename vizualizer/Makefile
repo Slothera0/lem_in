@@ -24,7 +24,9 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_PARSE)normalize_coord.c \
 		$(F_PARSE)check_coords.c \
 		$(F_REND)put_link.c \
-		$(F_REND)put_ant.c
+		$(F_REND)put_ant.c \
+		$(F_PARSE)read_ants_path.c \
+		$(F_PARSE)create_path.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)
