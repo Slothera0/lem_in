@@ -9,6 +9,7 @@
 t_lem_in	*read_term();
 float		normalize_coord(t_vector *nodes);
 t_vector	*read_ants_path();
+t_ant		*create_ant(int ants_nb, float x, float y);
 
 int init_window(t_rend *rend_adr);
 int start_rend(t_rend rend, t_lem_in *data);
@@ -24,6 +25,8 @@ int main()
 
 	t_rend rend;
 
+	rend.nodes = nodes;
+
 	rend.ant_paths = read_ants_path();
 	if (!rend.ant_paths)
 	{
@@ -35,13 +38,31 @@ int main()
 	}
 
 	rend.scale = 1 / normalize_coord(nodes);
+	t_node *start_node = get_start(nodes);
+	rend.ants = create_ant(data->nb_ants, start_node->x, start_node->y);
+	if (!rend.ants)
+	{
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
+		perror("ERROR");
+		return (1);
+	}
 
 	if (init_window(&rend) != 0)
 	{
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
+		perror("ERROR");
 		return (1);
 	}
 	if (start_rend(rend, data) != 0)
 	{
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
+		perror("ERROR");
 		return (1);
 	}
 

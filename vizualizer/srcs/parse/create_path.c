@@ -53,6 +53,8 @@ t_vector *create_path(char **split_line)
 		}
 		ft_free_array(one_path);
 	
+		if (p->node[ft_strlen(p->node) - 1] == '\n')
+			p->node[ft_strlen(p->node) - 1] = '\0';
 		path = vec_append(path, p);
 		if (!path)
 		{
@@ -60,7 +62,6 @@ t_vector *create_path(char **split_line)
 			free(p);
 			return (NULL);
 		}
-		printf("Path: %i -> %s\n", p->ant, p->node);
 	}
 	return (path);
 }

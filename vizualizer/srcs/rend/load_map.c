@@ -37,8 +37,8 @@ void	load_map(t_rend rend, t_lem_in *data)
 		}
 	}
 
-	t_node *start_node = nodes->array[0];
-	put_ant(rend, start_node->x, start_node->y); // TODO: positionner les fourmis correctement
+	// t_node *start_node = get_start(nodes);
+	// put_ant(rend, start_node->x, start_node->y); // TODO: positionner les fourmis correctement
 
 	glXSwapBuffers(rend.data.dpy, rend.data.win);
 }
