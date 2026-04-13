@@ -7,6 +7,7 @@
 void	clean_rend(t_rend rend);
 void	load_map(t_rend rend, t_lem_in *data);
 void	ants_movements(t_rend rend);
+void	ants_spawn(t_rend rend);
 
 void	put_node(t_rend *rend, float x, float y);
 void	put_link(t_rend rend, float x1, float y1, float x2, float y2);
@@ -62,6 +63,8 @@ int start_rend(t_rend rend, t_lem_in *data)
 				put_link(rend, node->x, node->y, linked_node->x, linked_node->y);
 			}
 		}
+
+		ants_spawn(rend);
 		ants_movements(rend);
 
 		glXSwapBuffers(rend.data.dpy, rend.data.win);

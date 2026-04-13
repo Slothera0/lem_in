@@ -29,7 +29,8 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)put_link.c \
 		$(F_REND)put_ant.c \
 		$(F_REND)ants_movements.c \
-		$(F_REND)calculate_ant_step.c
+		$(F_REND)calculate_ant_step.c \
+		$(F_REND)ants_spawn.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

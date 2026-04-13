@@ -45,6 +45,8 @@ int main()
 		vec_iter(nodes, free_node);
 		vec_free(nodes);
 		free(data);
+		vec_iter(rend.ant_paths, vec_free);
+		vec_free(rend.ant_paths);
 		perror("ERROR");
 		return (1);
 	}
@@ -54,6 +56,9 @@ int main()
 		vec_iter(nodes, free_node);
 		vec_free(nodes);
 		free(data);
+		vec_iter(rend.ant_paths, vec_free);
+		vec_free(rend.ant_paths);
+		free(rend.ants);
 		perror("ERROR");
 		return (1);
 	}
@@ -62,6 +67,9 @@ int main()
 		vec_iter(nodes, free_node);
 		vec_free(nodes);
 		free(data);
+		vec_iter(rend.ant_paths, vec_free);
+		vec_free(rend.ant_paths);
+		free(rend.ants);
 		perror("ERROR");
 		return (1);
 	}
@@ -69,5 +77,8 @@ int main()
 	vec_iter(nodes, free_node);
 	vec_free(nodes);
 	free(data);
+	vec_iter(rend.ant_paths, vec_free);
+	vec_free(rend.ant_paths);
+	free(rend.ants);
 	return (0);
 }

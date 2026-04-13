@@ -6,7 +6,7 @@
 void	fill_map(t_rend rend);
 void	put_node(t_rend *rend, float x, float y);
 void	put_link(t_rend rend, float x1, float y1, float x2, float y2);
-void	put_ant(t_rend rend, float x, float y);
+void	ants_spawn(t_rend rend);
 
 void	load_map(t_rend rend, t_lem_in *data)
 {
@@ -15,11 +15,6 @@ void	load_map(t_rend rend, t_lem_in *data)
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
-	// if (rend.text.id)
-	// {
- 	// 	fill_map(rend);
-	// }
 
 	t_vector *nodes = data->node;
 	for (unsigned int i = 0; i < nodes->size; i++)
@@ -38,8 +33,7 @@ void	load_map(t_rend rend, t_lem_in *data)
 		}
 	}
 
-	// t_node *start_node = get_start(nodes);
-	// put_ant(rend, start_node->x, start_node->y); // TODO: positionner les fourmis correctement
+	ants_spawn(rend);
 
 	glXSwapBuffers(rend.data.dpy, rend.data.win);
 }
