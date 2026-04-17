@@ -15,7 +15,7 @@ float	normalize_coord(t_vector *nodes)
 	float margin_left = 0.10f;
 	float margin_right = 0.10f;
 	float margin_bottom = 0.10f;
-	float margin_top = 0.20f;
+	float margin_top = 0.25f;
 	float scale_x = 1.0f - margin_left - margin_right;
 	float scale_y = 1.0f - margin_bottom - margin_top;
 
