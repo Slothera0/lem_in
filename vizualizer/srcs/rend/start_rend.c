@@ -46,11 +46,17 @@ int start_rend(t_rend rend, t_lem_in *data)
 				}
 				else if (ks == XK_Right)
 				{
-					rend.input.speed = 1.5;
+					if (rend.input.speed < 1.0)
+						rend.input.speed = 1;
+					else
+						rend.input.speed = 1.5;
 				}
 				else if (ks == XK_Left)
 				{
-					rend.input.speed = 0.5;
+					if (rend.input.speed > 1.0)
+						rend.input.speed = 1;
+					else
+						rend.input.speed = 0.5;
 				}
 			}
 		}
