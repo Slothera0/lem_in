@@ -3,7 +3,6 @@
 #include "node.h"
 #include "vector.h"
 
-
 #include <stdio.h>
 
 t_lem_in	*read_term();

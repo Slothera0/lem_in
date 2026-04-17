@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-void calculate_ant_step(t_rend rend, t_vector *path)
+void calculate_ant_step(t_rend rend, t_vector *path, double turn_progress)
 {
 	for (unsigned int i = 0; rend.ants[i].id != -1; i++)
 	{
@@ -21,7 +21,7 @@ void calculate_ant_step(t_rend rend, t_vector *path)
 			continue ;
 		float target_x = (float)current_node->x;
 		float target_y = (float)current_node->y;
-		ant->step_x = (target_x - ant->x) / TURN_TIME;
-		ant->step_y = (target_y - ant->y) / TURN_TIME;
+		ant->step_x = (target_x - ant->x) / (((double)TURN_TIME - turn_progress) / rend.input.speed);
+		ant->step_y = (target_y - ant->y) / (((double)TURN_TIME - turn_progress) / rend.input.speed);
 	}
 }

@@ -17,6 +17,7 @@ int start_rend(t_rend rend, t_lem_in *data)
 	XEvent xev;
 	rend.width = WIDTH;
 	rend.height = HEIGHT;
+	rend.input.speed = 1.0;
 
 	while (1) 
 	{
@@ -37,6 +38,18 @@ int start_rend(t_rend rend, t_lem_in *data)
 				{
 					clean_rend(rend);
 					return (0);
+				}
+				else if (ks == XK_space)
+				{
+					rend.input.pause = !rend.input.pause;
+				}
+				else if (ks == XK_Right)
+				{
+					rend.input.speed = 1.5;
+				}
+				else if (ks == XK_Left)
+				{
+					rend.input.speed = 0.5;
 				}
 			}
 		}
@@ -64,8 +77,10 @@ int start_rend(t_rend rend, t_lem_in *data)
 			}
 		}
 
-		ants_spawn(rend);
-		ants_movements(rend);
+		if (!rend.input.pause)
+			ants_movements(rend);
+		else
+			ants_spawn(rend);
 
 		glXSwapBuffers(rend.data.dpy, rend.data.win);
 		

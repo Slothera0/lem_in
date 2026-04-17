@@ -29,6 +29,7 @@ typedef struct s_data_gl
 	Window		win;
 	GLXContext	ctx;
 	Colormap	cmap;
+	XVisualInfo	*vi;
 } t_data_gl;
 
 typedef struct s_ant
@@ -40,10 +41,16 @@ typedef struct s_ant
 	float		step_y;
 }	t_ant;
 
+typedef struct s_input
+{
+	int 		pause;
+	double		speed;
+
+} t_input;
+
 typedef struct s_rend
 {
 	t_data_gl	data;
-	XVisualInfo	*vi;
 	t_texture	text;
 	t_texture	ant_text;
 	int			height;
@@ -52,6 +59,7 @@ typedef struct s_rend
 	t_vector	*ant_paths;
 	t_ant 		*ants;
 	t_vector	*nodes;
+	t_input		input;
 }	t_rend;
 
 typedef struct s_path

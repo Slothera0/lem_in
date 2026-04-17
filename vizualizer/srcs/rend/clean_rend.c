@@ -8,6 +8,6 @@ void clean_rend(t_rend rend)
 		glDeleteTextures(1, &rend.text.id);
 	XDestroyWindow(rend.data.dpy, rend.data.win);
 	XFreeColormap(rend.data.dpy, rend.data.cmap);
-	XFree(rend.vi);
+	XFree(rend.data.vi);
 	XCloseDisplay(rend.data.dpy);
 }
