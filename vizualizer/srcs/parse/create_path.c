@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 
+void free_path(void *data);
+
 t_vector *create_path(char **split_line)
 {
 	t_vector *path = vec_create(10);
@@ -58,8 +60,7 @@ t_vector *create_path(char **split_line)
 		path = vec_append(path, p);
 		if (!path)
 		{
-			free(p->node);
-			free(p);
+			free_path(p);
 			return (NULL);
 		}
 	}

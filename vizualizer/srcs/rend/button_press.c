@@ -1,7 +1,5 @@
 #include "rend.h"
 
-#include <stdio.h>
-
 void button_press(t_rend *rend, float x, float y)
 {
 	if (y < 0.85f - 0.02 || y > 0.95f + 0.02)

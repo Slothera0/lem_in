@@ -13,6 +13,8 @@ t_ant		*create_ant(int ants_nb, float x, float y);
 int init_window(t_rend *rend_adr);
 int start_rend(t_rend rend, t_lem_in *data);
 
+void free_path(void *data);
+
 int main()
 {
 	t_lem_in *data;
@@ -66,6 +68,10 @@ int main()
 		vec_iter(nodes, free_node);
 		vec_free(nodes);
 		free(data);
+		for(unsigned int i = 0; i < rend.ant_paths->size; i++)
+		{
+			vec_iter(rend.ant_paths->array[i], free_path);
+		}
 		vec_iter(rend.ant_paths, vec_free);
 		vec_free(rend.ant_paths);
 		free(rend.ants);
@@ -76,6 +82,10 @@ int main()
 	vec_iter(nodes, free_node);
 	vec_free(nodes);
 	free(data);
+	for(unsigned int i = 0; i < rend.ant_paths->size; i++)
+	{
+		vec_iter(rend.ant_paths->array[i], free_path);
+	}
 	vec_iter(rend.ant_paths, vec_free);
 	vec_free(rend.ant_paths);
 	free(rend.ants);

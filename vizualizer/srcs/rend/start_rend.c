@@ -6,12 +6,12 @@
 
 #include <stdio.h>
 
-void	clean_rend(t_rend rend);
+void	clean_rend(t_rend *rend);
 void	load_map(t_rend rend, t_lem_in *data);
 void	ants_movements(t_rend rend);
 void	ants_spawn(t_rend rend);
 void 	menu(t_rend *rend);
-void	button_press(t_rend *rend, float x, float y);
+int		handle_input(t_rend *rend, XEvent xev);
 
 void	put_node(t_rend *rend, float x, float y);
 void	put_link(t_rend rend, float x1, float y1, float x2, float y2);
@@ -37,43 +37,8 @@ int start_rend(t_rend rend, t_lem_in *data)
 				load_map(rend, data);
 			}
 
-			if (xev.type == KeyPress) {
-				KeySym ks = XLookupKeysym(&xev.xkey, 0);
-				if (ks == XK_Escape)
-				{
-					clean_rend(rend);
-					return (0);
-				}
-				else if (ks == XK_space)
-				{
-					rend.input.pause = !rend.input.pause;
-				}
-				else if (ks == XK_Right)
-				{
-					if (rend.input.speed < 1.0)
-						rend.input.speed = 1;
-					else
-						rend.input.speed = 1.5;
-				}
-				else if (ks == XK_Left)
-				{
-					if (rend.input.speed > 1.0)
-						rend.input.speed = 1;
-					else
-						rend.input.speed = 0.5;
-				}
-			}
-			if (xev.type == ButtonPress) {
-			    int mouse_x = xev.xbutton.x;
-			    int mouse_y = xev.xbutton.y;
-				float norm_x = (2.0f * mouse_x / rend.width) - 1.0f;
-				float norm_y = 1.0f - (2.0f * mouse_y / rend.height);
-			    int button = xev.xbutton.button;
-
-				if (button == Button1) {
-					button_press(&rend, norm_x, norm_y);
-			    }
-			}
+			if (handle_input(&rend, xev))
+				return (0);
 		}
 
 		glClearColor(BACKGROUND_COLOR);
@@ -111,6 +76,6 @@ int start_rend(t_rend rend, t_lem_in *data)
 		usleep(16000); // environ 60 FPS
 	}
 
-	clean_rend(rend);
+	clean_rend(&rend);
 	return (0);
 }

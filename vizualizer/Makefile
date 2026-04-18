@@ -18,6 +18,7 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_PARSE)read_ants_path.c \
 		$(F_PARSE)create_path.c \
 		$(F_PARSE)create_ants.c \
+		$(F_PARSE)free_path.c \
 		$(F_REND)start_rend.c \
 		$(F_REND)init_visual.c \
 		$(F_REND)init_window.c \
@@ -33,7 +34,8 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)ants_spawn.c \
 		$(F_REND)ants_on_path.c \
 		$(F_REND)menu.c \
-		$(F_REND)button_press.c
+		$(F_REND)button_press.c \
+		$(F_REND)handle_input.c
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

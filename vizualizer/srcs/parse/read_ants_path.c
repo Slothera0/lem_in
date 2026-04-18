@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 t_vector	*create_path(char **split_line);
+void 		free_path(void *data);
 
 t_vector	*read_ants_path()
 {
@@ -29,6 +30,10 @@ t_vector	*read_ants_path()
 		ft_free_array(split_line);
 		if (!path)	
 		{
+			for(unsigned int i = 0; i < paths->size; i++)
+			{
+				vec_iter(paths->array[i], free_path);
+			}
 			vec_iter(paths, vec_free);
 			vec_free(paths);
 			get_next_line(-1);
@@ -37,6 +42,7 @@ t_vector	*read_ants_path()
 		paths = vec_append(paths, path);
 		if (!paths)
 		{
+			vec_iter(path, free_path);
 			vec_free(path);
 			get_next_line(-1);
 			return (NULL);
