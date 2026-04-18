@@ -29,15 +29,6 @@ void	ants_movements(t_rend rend)
 
 	last_speed = rend.input.speed;
 
-	// for (unsigned int i = 0; i < path->size; i++)
-	// {
-	// 	t_path *p = path->array[i];
-	// 	t_ant *ant = &rend.ants[p->ant - 1];
-	// 	ant->x += ant->step_x;
-	// 	ant->y += ant->step_y;
-	// 	put_ant(rend, ant->x, ant->y);
-	// }
-
 	for (unsigned int i = 0; rend.ants[i].id != -1; i++)
 	{
 		t_ant *ant = &rend.ants[i];

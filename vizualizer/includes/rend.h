@@ -16,6 +16,18 @@
 
 # define TURN_TIME 180
 
+typedef struct s_button_pos
+{
+	float play_left;
+	float play_right;
+	float pause_left;
+	float pause_right;
+	float accel_left;
+	float accel_right;
+	float decel_left;
+	float decel_right;
+}	t_button_pos;
+
 typedef struct s_texture
 {
 	GLuint 		id;
@@ -50,16 +62,17 @@ typedef struct s_input
 
 typedef struct s_rend
 {
-	t_data_gl	data;
-	t_texture	text;
-	t_texture	ant_text;
-	int			height;
-	int			width;
-	float		scale;
-	t_vector	*ant_paths;
-	t_ant 		*ants;
-	t_vector	*nodes;
-	t_input		input;
+	t_data_gl		data;
+	t_texture		text;
+	t_texture		ant_text;
+	int				height;
+	int				width;
+	float			scale;
+	t_vector		*ant_paths;
+	t_ant 			*ants;
+	t_vector		*nodes;
+	t_input			input;
+	t_button_pos	button_pos;
 }	t_rend;
 
 typedef struct s_path

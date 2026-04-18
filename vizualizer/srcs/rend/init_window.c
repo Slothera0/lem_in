@@ -27,7 +27,7 @@ int init_window(t_rend *rend_adr)
 	rend.data.cmap = XCreateColormap(rend.data.dpy, RootWindow(rend.data.dpy, screen), rend.data.vi->visual, AllocNone);
 	XSetWindowAttributes swa;
 	swa.colormap = rend.data.cmap;
-	swa.event_mask = ExposureMask | KeyPressMask | StructureNotifyMask;
+	swa.event_mask = ExposureMask | KeyPressMask | StructureNotifyMask | ButtonPressMask | ButtonReleaseMask;
 
 	rend.data.win = XCreateWindow(rend.data.dpy, RootWindow(rend.data.dpy, screen), 0, 0, WIDTH, HEIGHT, 0, rend.data.vi->depth, InputOutput, rend.data.vi->visual, CWColormap | CWEventMask, &swa);
 	XStoreName(rend.data.dpy, rend.data.win, WINDOW_TITLE);

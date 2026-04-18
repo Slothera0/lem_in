@@ -7,7 +7,7 @@ void	fill_map(t_rend rend);
 void	put_node(t_rend *rend, float x, float y);
 void	put_link(t_rend rend, float x1, float y1, float x2, float y2);
 void	ants_spawn(t_rend rend);
-void 	menu(t_rend rend);
+void 	menu(t_rend *rend);
 
 void	load_map(t_rend rend, t_lem_in *data)
 {
@@ -35,7 +35,7 @@ void	load_map(t_rend rend, t_lem_in *data)
 	}
 
 	ants_spawn(rend);
-	menu(rend);
+	menu(&rend);
 
 	glXSwapBuffers(rend.data.dpy, rend.data.win);
 }
