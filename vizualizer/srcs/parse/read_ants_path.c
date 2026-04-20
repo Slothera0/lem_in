@@ -13,10 +13,17 @@ t_vector	*read_ants_path()
 	t_vector *paths = vec_create(10);
 	if (!paths)
 		return (NULL);
-	
+
 	char *line = get_next_line(0);
 	while (line)
 	{
+		remove_endline(line);
+		if (!line[0])
+		{
+			free(line);
+			line = get_next_line(0);
+			continue ;
+		}
 		char **split_line = ft_split(line, ' ');
 		free(line);
 		if (!split_line)

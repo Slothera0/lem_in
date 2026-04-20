@@ -23,7 +23,7 @@ t_vector *create_path(char **split_line)
 			vec_free(path);
 			return (NULL);
 		}
-		char **one_path = ft_split(split_line[i] + 1, '-'); // voir si + 1 casse pas tout
+		char **one_path = ft_split(split_line[i] + 1, '-');
 		if (!one_path)
 		{
 			free(p);
@@ -55,8 +55,6 @@ t_vector *create_path(char **split_line)
 		}
 		ft_free_array(one_path);
 	
-		if (p->node[ft_strlen(p->node) - 1] == '\n')
-			p->node[ft_strlen(p->node) - 1] = '\0';
 		path = vec_append(path, p);
 		if (!path)
 		{
