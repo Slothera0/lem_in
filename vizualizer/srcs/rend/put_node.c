@@ -7,12 +7,12 @@
 
 #include <stdio.h>
 
-void put_node(t_rend *rend, float x, float y, t_room_type type)
+void put_node(t_rend rend, float x, float y, t_room_type type)
 {
 	int segments = 32;
-	float size_px = (rend->width > rend->height ? rend->height : rend->width) * 0.7f * rend->scale;
-	float rx = (size_px / rend->width) * 2.0f;
-	float ry = (size_px / rend->height) * 2.0f;
+	float size_px = (rend.width > rend.height ? rend.height : rend.width) * 0.7f * rend.scale;
+	float rx = (size_px / rend.width) * 2.0f;
+	float ry = (size_px / rend.height) * 2.0f;
 
 	if (type == START)
 		glColor4f(START_NODE_COLOR);

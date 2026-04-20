@@ -35,7 +35,8 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)ants_on_path.c \
 		$(F_REND)menu.c \
 		$(F_REND)button_press.c \
-		$(F_REND)handle_input.c
+		$(F_REND)handle_input.c \
+		$(F_REND)put_all_nodes_and_links.c \
 
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

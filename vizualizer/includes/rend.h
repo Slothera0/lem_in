@@ -59,6 +59,7 @@ typedef struct s_input
 {
 	int 		pause;
 	double		speed;
+	int			view_unused;
 
 } t_input;
 
