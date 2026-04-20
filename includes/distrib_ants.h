@@ -13,9 +13,4 @@ typedef struct s_distrib_ants
     unsigned int nb_ants;
 } t_distrib_ants;
 
-typedef struct s_edge
-{
-    
-}   t_edge;
-
 #endif
