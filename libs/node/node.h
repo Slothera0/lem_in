@@ -26,6 +26,7 @@ typedef struct s_node
 	float 			x;
 	float 			y;
 	t_room_type 	type;
+	int				visited;
 } t_node ;
 
 t_node		*get_node(t_vector *vector, char *name);

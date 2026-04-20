@@ -13,6 +13,8 @@
 
 # define BACKGROUND_COLOR 0.0f, 0.0f, 0.0f, 1.0f
 # define NODE_COLOR 0.4f, 0.1f, 0.4f, 1.0f
+# define START_NODE_COLOR 0.1f, 0.4f, 0.1f, 1.0f
+# define END_NODE_COLOR 0.4f, 0.1f, 0.1f, 1.0f
 
 # define TURN_TIME 180
 

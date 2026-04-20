@@ -1,12 +1,13 @@
 #include "vector.h"
 #include "libft.h"
 #include "rend.h"
+#include "node.h"
 
 #include <stdio.h>
 
 void free_path(void *data);
 
-t_vector *create_path(char **split_line)
+t_vector *create_path(char **split_line, t_vector *nodes)
 {
 	t_vector *path = vec_create(10);
 	if (!path)
@@ -54,6 +55,17 @@ t_vector *create_path(char **split_line)
 			return (NULL);
 		}
 		ft_free_array(one_path);
+
+		t_node *node = get_node(nodes, p->node);
+		if (!node)
+		{
+			free(p->node);
+			free(p);
+			vec_iter(path, free);
+			vec_free(path);
+			return (NULL);
+		}
+		node->visited = 1;
 	
 		path = vec_append(path, p);
 		if (!path)

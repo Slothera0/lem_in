@@ -5,10 +5,10 @@
 
 #include <stdio.h>
 
-t_vector	*create_path(char **split_line);
+t_vector	*create_path(char **split_line, t_vector *nodes);
 void 		free_path(void *data);
 
-t_vector	*read_ants_path()
+t_vector	*read_ants_path(t_vector *nodes)
 {
 	t_vector *paths = vec_create(10);
 	if (!paths)
@@ -33,7 +33,7 @@ t_vector	*read_ants_path()
 			get_next_line(-1);
 			return (NULL);
 		}
-		t_vector *path = create_path(split_line);
+		t_vector *path = create_path(split_line, nodes);
 		ft_free_array(split_line);
 		if (!path)	
 		{

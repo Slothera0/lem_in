@@ -2,12 +2,14 @@
 #include "lem_in.h"
 #include "node.h"
 #include "vector.h"
+#include "libft.h"
+#include <errno.h>
 
 #include <stdio.h>
 
 t_lem_in	*read_term();
 float		normalize_coord(t_vector *nodes);
-t_vector	*read_ants_path();
+t_vector	*read_ants_path(t_vector *nodes);
 t_ant		*create_ant(int ants_nb, float x, float y);
 
 int init_window(t_rend *rend_adr);
@@ -28,13 +30,17 @@ int main()
 
 	rend.nodes = nodes;
 
-	rend.ant_paths = read_ants_path();
+	errno = 0;
+	rend.ant_paths = read_ants_path(nodes);
 	if (!rend.ant_paths)
 	{
 		vec_iter(nodes, free_node);
 		vec_free(nodes);
 		free(data);
-		perror("ERROR");
+		if (errno > 0)
+			perror("ERROR");
+		else
+			ft_putstr_fd("ERROR\n", 2);
 		exit(1);
 	}
 
