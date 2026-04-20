@@ -49,6 +49,7 @@ int main()
 		rend.scale = 0.1f;
 
 	t_node *start_node = get_start(nodes);
+	start_node->visited = 1;
 	rend.ants = create_ant(data->nb_ants, start_node->x, start_node->y);
 	if (!rend.ants)
 	{

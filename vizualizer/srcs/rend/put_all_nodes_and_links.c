@@ -12,7 +12,8 @@ void	put_all_nodes_and_links(t_rend rend, t_vector *nodes)
 		for (unsigned int j = 0; j < node->links->size; j++)
 		{
 			t_node *linked_node = node->links->array[j];
-			put_link(rend, node->x, node->y, linked_node->x, linked_node->y);
+			if (rend.input.view_unused || (node->visited && linked_node->visited))
+				put_link(rend, node->x, node->y, linked_node->x, linked_node->y);
 		}
 	}
 	for (unsigned int i = 0; i < nodes->size; i++)

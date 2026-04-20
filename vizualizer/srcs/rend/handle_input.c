@@ -30,6 +30,10 @@ int handle_input(t_rend *rend, XEvent xev)
 			else
 				rend->input.speed = 0.5;
 		}
+		else if (ks == XK_u)
+		{
+			rend->input.view_unused = !rend->input.view_unused;
+		}
 	}
 	if (xev.type == ButtonPress) {
 	    int mouse_x = xev.xbutton.x;
