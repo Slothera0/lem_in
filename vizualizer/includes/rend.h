@@ -9,7 +9,7 @@
 
 # define HEIGHT 600
 # define WIDTH 800
-# define MAX_COORD 50.0f
+# define MAX_COORD 100.0f
 
 # define BACKGROUND_COLOR 0.0f, 0.0f, 0.0f, 1.0f
 # define NODE_COLOR 0.4f, 0.1f, 0.4f, 1.0f

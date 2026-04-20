@@ -39,6 +39,9 @@ int main()
 	}
 
 	rend.scale = 1 / normalize_coord(nodes);
+	if (rend.scale > 0.1f)
+		rend.scale = 0.1f;
+
 	t_node *start_node = get_start(nodes);
 	rend.ants = create_ant(data->nb_ants, start_node->x, start_node->y);
 	if (!rend.ants)
