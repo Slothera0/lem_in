@@ -14,54 +14,6 @@ void sort_path_by_size(t_vector *all_path);
 unsigned int best_k_path(t_vector *all_path, unsigned int nb_ants);
 void remove_path_usless(t_vector *all_path, unsigned int k);
 
-t_vector	*find_all_way(t_lem_in *data)
-{
-	t_node *start;
-	t_vector *path;
-	t_vector *all_path;
-	t_vector *tmp;
-	unsigned int nb_path;
-	unsigned int k;
-
-	nb_path = 5;
-	if (data->nb_ants > 50)
-		nb_path = data->nb_ants / 10;
-	all_path = vec_create(10);
-	if (!all_path)
-		return (NULL);
-	start = get_start(data->node);
-	if (!start)
-	{
-		vec_free(all_path);
-		return (NULL);
-	}
-
-	while(all_path->size < nb_path)
-	{
-		reset_nodes(data->node);
-		start->visited = 1;
-		start->parent = NULL;
-		path = find_shortest_path(start);
-		if (!path)
-			break;
-		tmp = vec_append(all_path, path);
-        if (!tmp)
-        {
-            vec_free(path);
-            vec_free(all_path);
-            return (NULL);
-        }
-        all_path = tmp;
-		block_path(path);
-	}
-	sort_path_by_size(all_path);
-	k = 0;
-	k = best_k_path(all_path, data->nb_ants);
-	remove_path_usless(all_path, k);
-
-	return (all_path);
-}
-
 void remove_path_usless(t_vector *all_path, unsigned int k)
 {
 	t_vector *path;
@@ -76,57 +28,6 @@ void remove_path_usless(t_vector *all_path, unsigned int k)
 		vec_free(path);
 		all_path->size = all_path->size - 1;
 	}
-}
-
-t_vector *find_shortest_path(t_node *start)
-{
-	t_node *child;
-	t_vector *queue;
-	t_vector *tmp;
-	t_node *current;
-	unsigned int head;
-
-	head = 0;
-	queue = vec_create(10);
-	if (!queue)
-		return (NULL);
-	tmp = vec_append(queue, start);
-	if (!tmp)
-	{
-		vec_free(queue);
-		return (NULL);
-	}
-	queue = tmp;
-	while (head < queue->size)
-	{
-		current = (t_node *)queue->array[head];
-		head++;
-		if (current->type == END)
-		{
-			vec_free(queue);
-			return (rebuild_path(current));
-		}
-		for (unsigned int i = 0; i < current->links->size; i++)
-		{
-			
-			child = (t_node *)current->links->array[i];
-			if (!child->visited && !child->blocked)
-			{
-				child->visited = 1;
-				child->parent = current;
-				tmp = vec_append(queue, child);
-				if (!tmp)
-				{
-					vec_free(queue);
-					return (NULL);
-				}
-				queue = tmp;
-			}
-		}
-	}
-	vec_free(queue);
-
-	return (NULL);
 }
 
 void sort_path_by_size(t_vector *all_path)
@@ -220,48 +121,4 @@ unsigned int best_k_path(t_vector *all_path, unsigned int nb_ants)
 		}
 	}
 	return best_path;
-}
-
-t_vector *rebuild_path(t_node *current)
-{
-	t_vector *path;
-	t_vector *tmp;
-
-	path = vec_create(10);
-	if (!path)
-		return (NULL);
-	while (current)
-	{
-		tmp = vec_append(path, current);
-		if (!tmp)
-		{
-			vec_free(path);
-			return (NULL);
-		}
-		path = tmp;
-		current = current->parent;
-	}
-	reverse_path(path);
-	return (path);
-}
-
-void reverse_path(t_vector *path)
-{
-	void *tmp;
-	unsigned int i;
-	unsigned int j;
-
-	i = 0;
-	if (!path || path->size < 2)
-		return;
-	j = path->size-1;
-	while (i < j)
-	{
-		tmp = path->array[i];
-		path->array[i] = path->array[j];
-		path->array[j] = tmp;
-		i++;
-		j--;
-	}
-
 }

@@ -3,8 +3,10 @@
 
 
 void reset_fnodes(t_vector *graph);
+int rebuilt_path(t_door *start_door, t_door *end_door, t_vector *path);
+int has_positive_flow_path(t_door *start_door);
 
-t_vector *bfs_flow(t_vector *doors, t_door *start_door, t_door *end_door)
+static t_vector *bfs_flow(t_door *start_door, t_door *end_door)
 {
     t_vector *queue;
     t_vector *tmp;
@@ -30,9 +32,7 @@ t_vector *bfs_flow(t_vector *doors, t_door *start_door, t_door *end_door)
         current = (t_fnode *)queue->array[head];
         head++;
         if(current == end_door->in)
-        {
             return (queue);
-        }
         for (unsigned int i = 0; i < current->edges->size; i++)
         {
             edge = (t_edge *)current->edges->array[i];
@@ -50,29 +50,110 @@ t_vector *bfs_flow(t_vector *doors, t_door *start_door, t_door *end_door)
             }
         }
     }
+    vec_free(queue);
+    return (NULL);
 }
 
-int bfs(t_lem_in *data)
+t_vector *bfs(t_lem_in *data)
 {
     t_door *start_door;
     t_door *end_door;
     t_vector *graph;
+    t_vector *queue;
+    t_vector *paths;
     t_vector *path;
     t_fnode *current;
     t_edge *edge;
 
     graph = build_flow_graph(data, &start_door,&end_door);
-    reset_fnodes(graph);
-    while(bfs_flow(graph, start_door, end_door))
+    paths = vec_create(10);
+    while(1)
     {
-        current = (t_fnode *)end_door;
-        while (current != start_door->in)
+        reset_fnodes(graph);
+        queue  = bfs_flow(start_door, end_door);
+        if(!queue)
+            break;
+        vec_free(queue);
+        current = end_door->in;
+        while (current != start_door->out)
         {
             edge = current->parent_edge;
-            path = vec_append(path, edge);
+            edge->flow += 1;
+            edge->rev->flow -= 1;
             current = edge->rev->to;
+        }   
+    }
+    edge = (t_edge *)start_door->out->edges->array[0];
+    while(has_positive_flow_path(start_door))
+    {
+        path = vec_create(10);
+        rebuilt_path(start_door, end_door, path);
+        paths = vec_append(paths, path);
+    }
+    return paths;
+}
+
+t_edge *find_positive_flow_edge(t_fnode *current)
+{
+    t_edge *edge;
+
+    for( unsigned int i = 0; i < current->edges->size; i++ )
+    {
+        edge = (t_edge *)current->edges->array[i];
+        if (edge->flow > 0)
+            return (edge);
+    }
+    return (NULL);
+}
+
+int has_positive_flow_path(t_door *start_door)
+{
+    t_fnode *current;
+    t_edge  *edge;
+
+    current = start_door->out;
+    while (current)
+    {
+        edge = find_positive_flow_edge(current);
+        if (!edge)
+            return (0);
+        if (edge->to->room && edge->to->room->type == END)
+            return (1);
+        current = edge->to;
+    }
+    return (0);
+}
+
+int rebuilt_path(t_door *start_door, t_door *end_door, t_vector *path)
+{
+    t_fnode *current;
+    t_edge *edge;
+    t_vector *tmp;
+    t_node *last_room;
+
+    current = start_door->out;
+    last_room = start_door->out->room;
+    tmp = vec_append(path, start_door->out->room);
+    if (!tmp)
+        return (0);
+    path = tmp;
+    while (current != end_door->in)
+    {
+        edge = find_positive_flow_edge(current);
+        if(!edge)
+            return (0);
+        edge->flow -= 1;
+        current = edge->to;
+        if (current->room != last_room)
+        {
+            tmp = vec_append(path, current->room);
+            if (!tmp)
+                return (0);
+            path = tmp;
+            last_room = current->room;
         }
     }
+    return (1);
 }
 
 void reset_fnodes(t_vector *graph)
