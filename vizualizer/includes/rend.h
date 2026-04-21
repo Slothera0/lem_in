@@ -30,6 +30,8 @@ typedef struct s_button_pos
 	float decel_right;
 	float unused_left;
 	float unused_right;
+	float reset_left;
+	float reset_right;
 }	t_button_pos;
 
 typedef struct s_texture
@@ -72,6 +74,7 @@ typedef struct s_rend
 	t_texture		ant_text;
 	t_texture		see_unused_text;
 	t_texture		unsee_unused_text;
+	t_texture		reset_text;
 	int				height;
 	int				width;
 	float			scale;

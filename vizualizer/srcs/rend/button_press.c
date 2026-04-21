@@ -1,5 +1,7 @@
 #include "rend.h"
 
+void	reset_progress(t_rend *rend);
+
 void button_press(t_rend *rend, float x, float y)
 {
 	if (y < 0.85f - 0.02 || y > 0.95f + 0.02)
@@ -29,5 +31,9 @@ void button_press(t_rend *rend, float x, float y)
 	else if (x >= rend->button_pos.unused_left - 0.02 && x <= rend->button_pos.unused_right + 0.02)
 	{
 		rend->input.view_unused = !rend->input.view_unused;
+	}
+	else if (x >= rend->button_pos.reset_left - 0.02 && x <= rend->button_pos.reset_right + 0.02)
+	{
+		reset_progress(rend);
 	}
 }

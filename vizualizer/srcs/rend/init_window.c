@@ -66,6 +66,10 @@ int init_window(t_rend *rend_adr)
 	if (!rend.see_unused_text.id)
 		fprintf(stderr, "warning: could not load eye_bar3.png\n");
 
+	rend.reset_text.id = load_png_texture("textures/reset.png", &rend.reset_text.width, &rend.reset_text.height);
+	if (!rend.reset_text.id)
+		fprintf(stderr, "warning: could not load reset.png\n");
+
 	*rend_adr = rend;
 	return (0);
 }

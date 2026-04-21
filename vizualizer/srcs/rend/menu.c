@@ -6,6 +6,7 @@ static void 	pause_button(t_rend *rend);
 static void 	accelerate_button(t_rend *rend);
 static void 	decelerate_button(t_rend *rend);
 static void		unused_button(t_rend *rend);
+static void		reset_button(t_rend *rend);
 
 void menu(t_rend *rend)
 {
@@ -35,6 +36,9 @@ void menu(t_rend *rend)
 	rend->button_pos.unused_left = -0.67 * (max_border / rend->width);
 	rend->button_pos.unused_right = -0.48 * (max_border / rend->width);
 
+	rend->button_pos.reset_left = 0.48 * (max_border / rend->width);
+	rend->button_pos.reset_right = 0.67 * (max_border / rend->width);
+
 	if (!rend->input.pause)
 		pause_button(rend);
 	else
@@ -44,6 +48,7 @@ void menu(t_rend *rend)
 	decelerate_button(rend);
 	
 	unused_button(rend);
+	reset_button(rend);
 	
 }
 
@@ -132,6 +137,26 @@ static void	unused_button(t_rend *rend)
 		glTexCoord2f(0.0f, 1.0f); glVertex2f(rend->button_pos.unused_left, 0.84);
 		glTexCoord2f(0.0f, 0.0f); glVertex2f(rend->button_pos.unused_left, 0.98);
 		glTexCoord2f(1.0f, 0.0f); glVertex2f(rend->button_pos.unused_right, 0.98);
+	glEnd();
+
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+}
+
+static void	reset_button(t_rend *rend)
+{
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, rend->reset_text.id);
+	glColor3f(0.0f, 0.0f, 0.0f);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glBegin(GL_QUADS);
+		glTexCoord2f(1.0f, 1.0f); glVertex2f(rend->button_pos.reset_right, 0.84);
+		glTexCoord2f(0.0f, 1.0f); glVertex2f(rend->button_pos.reset_left, 0.84);
+		glTexCoord2f(0.0f, 0.0f); glVertex2f(rend->button_pos.reset_left, 0.98);
+		glTexCoord2f(1.0f, 0.0f); glVertex2f(rend->button_pos.reset_right, 0.98);
 	glEnd();
 
 	glDisable(GL_BLEND);
