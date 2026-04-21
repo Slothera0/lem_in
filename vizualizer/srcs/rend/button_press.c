@@ -26,4 +26,8 @@ void button_press(t_rend *rend, float x, float y)
 		else
 		rend->input.speed = 1.5;
 	}
+	else if (x >= rend->button_pos.unused_left - 0.02 && x <= rend->button_pos.unused_right + 0.02)
+	{
+		rend->input.view_unused = !rend->input.view_unused;
+	}
 }

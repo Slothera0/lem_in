@@ -52,21 +52,19 @@ int init_window(t_rend *rend_adr)
 	}
 	glXMakeCurrent(rend.data.dpy, rend.data.win, rend.data.ctx);
 
-	//glDisable(GL_DEPTH_TEST); // tester de le desactiver plus tard
-
-
-	rend.text.id = load_png_texture("textures/dirt.png", &rend.text.width, &rend.text.height);
-	if (!rend.text.id)
-		fprintf(stderr, "warning: could not load dirt.png\n");
-
-	rend.text.width = 100;
-	rend.text.height = 100;
-
 	rend.ant_text.id = load_png_texture("textures/lrio.png", &rend.ant_text.width, &rend.ant_text.height);
 	if (!rend.ant_text.id)
 		fprintf(stderr, "warning: could not load lrio.png\n");
 	rend.ant_text.width = 1;
 	rend.ant_text.height = 1;
+
+	rend.unsee_unused_text.id = load_png_texture("textures/eye.png", &rend.unsee_unused_text.width, &rend.unsee_unused_text.height);
+	if (!rend.unsee_unused_text.id)
+		fprintf(stderr, "warning: could not load eye.png\n");
+	
+	rend.see_unused_text.id = load_png_texture("textures/eye_bar3.png", &rend.see_unused_text.width, &rend.see_unused_text.height);
+	if (!rend.see_unused_text.id)
+		fprintf(stderr, "warning: could not load eye_bar3.png\n");
 
 	*rend_adr = rend;
 	return (0);
