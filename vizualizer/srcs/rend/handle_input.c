@@ -2,6 +2,7 @@
 
 void	clean_rend(t_rend *rend);
 void	button_press(t_rend *rend, float x, float y);
+void	reset_progress(t_rend *rend);
 
 int handle_input(t_rend *rend, XEvent xev)
 {
@@ -21,7 +22,7 @@ int handle_input(t_rend *rend, XEvent xev)
 			if (rend->input.speed < 1.0)
 				rend->input.speed = 1;
 			else
-				rend->input.speed = 1.5;
+				rend->input.speed = 2.0;
 		}
 		else if (ks == XK_Left)
 		{
@@ -33,6 +34,10 @@ int handle_input(t_rend *rend, XEvent xev)
 		else if (ks == XK_u)
 		{
 			rend->input.view_unused = !rend->input.view_unused;
+		}
+		else if (ks == XK_r)
+		{
+			reset_progress(rend);
 		}
 	}
 	if (xev.type == ButtonPress) {

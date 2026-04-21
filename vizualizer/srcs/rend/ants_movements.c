@@ -1,5 +1,6 @@
 #include "rend.h"
 #include "vector.h"
+#include "node.h"
 
 #include <stdio.h>
 
@@ -47,4 +48,18 @@ void	ants_movements(t_rend rend)
 		turn++;
 	}
 
+}
+
+void	reset_progress(t_rend *rend)
+{
+	turn = 0;
+	turn_progress = 0;
+
+	t_node *start_node = get_start(rend->nodes);
+
+	for (unsigned int i = 0; rend->ants[i].id != -1; i++)
+	{
+		rend->ants[i].x = start_node->x;
+		rend->ants[i].y = start_node->y;
+	}
 }
