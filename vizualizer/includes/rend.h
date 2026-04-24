@@ -70,7 +70,6 @@ typedef struct s_input
 typedef struct s_rend
 {
 	t_data_gl		data;
-	t_texture		text;
 	t_texture		ant_text;
 	t_texture		see_unused_text;
 	t_texture		unsee_unused_text;

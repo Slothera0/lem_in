@@ -24,7 +24,6 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_REND)init_window.c \
 		$(F_REND)load_png_texture.c \
 		$(F_REND)clean_rend.c \
-		$(F_REND)fill_map.c \
 		$(F_REND)put_node.c \
 		$(F_REND)load_map.c \
 		$(F_REND)put_link.c \
@@ -96,4 +95,4 @@ re: fclean all
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re valgrind

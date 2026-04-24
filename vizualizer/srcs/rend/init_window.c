@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "rend.h"
+#include <errno.h>
 
 XVisualInfo *init_visual(Display *dpy, int screen);
 GLuint 		load_png_texture(const char *path, int *out_w, int *out_h);
@@ -28,7 +29,6 @@ int init_window(t_rend *rend_adr)
 	XSetWindowAttributes swa;
 	swa.colormap = rend.data.cmap;
 	swa.event_mask = ExposureMask | KeyPressMask | StructureNotifyMask | ButtonPressMask | ButtonReleaseMask;
-
 	rend.data.win = XCreateWindow(rend.data.dpy, RootWindow(rend.data.dpy, screen), 0, 0, WIDTH, HEIGHT, 0, rend.data.vi->depth, InputOutput, rend.data.vi->visual, CWColormap | CWEventMask, &swa);
 	XStoreName(rend.data.dpy, rend.data.win, WINDOW_TITLE);
 	XMapWindow(rend.data.dpy, rend.data.win);

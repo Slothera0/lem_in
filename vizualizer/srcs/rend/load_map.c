@@ -3,7 +3,6 @@
 #include "lem_in.h"
 #include "node.h"
 
-void	fill_map(t_rend rend);
 void	ants_spawn(t_rend rend);
 void 	menu(t_rend *rend);
 void	put_all_nodes_and_links(t_rend rend, t_vector *nodes);
