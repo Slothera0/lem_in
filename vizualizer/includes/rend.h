@@ -74,6 +74,7 @@ typedef struct s_rend
 	t_texture		see_unused_text;
 	t_texture		unsee_unused_text;
 	t_texture		reset_text;
+	Atom			wm_delete;
 	int				height;
 	int				width;
 	float			scale;

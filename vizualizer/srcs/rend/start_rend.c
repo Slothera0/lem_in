@@ -20,6 +20,8 @@ int start_rend(t_rend rend, t_lem_in *data)
 	rend.input.speed = 1.0;
 	rend.input.pause = 0;
 	rend.input.view_unused = 1;
+	rend.wm_delete = XInternAtom(rend.data.dpy, "WM_DELETE_WINDOW", False);
+	XSetWMProtocols(rend.data.dpy, rend.data.win, &rend.wm_delete, 1);
 
 	while (1) 
 	{

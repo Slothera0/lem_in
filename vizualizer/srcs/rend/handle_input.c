@@ -45,6 +45,14 @@ int handle_input(t_rend *rend, XEvent xev)
 		if (button == Button1)
 			button_press(rend, norm_x, norm_y);
 	}
+	if (xev.type == ClientMessage)
+    {
+		if ((Atom)xev.xclient.data.l[0] == rend->wm_delete)
+		{
+			clean_rend(rend);
+			return (1);
+		}
+    }
 
 	return (0);
 }
