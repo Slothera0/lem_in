@@ -67,6 +67,10 @@ int main()
 		vec_iter(nodes, free_node);
 		vec_free(nodes);
 		free(data);
+		for(unsigned int i = 0; i < rend.ant_paths->size; i++)
+		{
+			vec_iter(rend.ant_paths->array[i], free_path);
+		}
 		vec_iter(rend.ant_paths, vec_free);
 		vec_free(rend.ant_paths);
 		free(rend.ants);

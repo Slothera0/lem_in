@@ -17,7 +17,7 @@ int init_window(t_rend *rend_adr)
 		return (1);
 	}
 
-	int screen = DefaultScreen(rend.data.dpy);
+	int screen = DefaultScreen(rend.data.dpy);	
 
 	rend.data.vi = init_visual(rend.data.dpy, screen);
 	if (!rend.data.vi) {
