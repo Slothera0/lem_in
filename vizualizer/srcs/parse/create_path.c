@@ -3,8 +3,6 @@
 #include "rend.h"
 #include "node.h"
 
-#include <stdio.h>
-
 void free_path(void *data);
 
 t_vector *create_path(char **split_line, t_vector *nodes)

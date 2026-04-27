@@ -42,6 +42,7 @@ t_vector *create_node(t_vector *nodes, char **args, t_room_type type)
 	new->x = ft_atoi(args[1]);
 	new->y = ft_atoi(args[2]);
 	new->type = type;
+	new->visited = 0;
 
 	nodes = vec_append(nodes, new);
 	if (!nodes)	

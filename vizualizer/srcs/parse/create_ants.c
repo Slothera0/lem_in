@@ -1,7 +1,5 @@
 #include "rend.h"
 
-
-
 t_ant	*create_ant(int ants_nb, float x, float y)
 {
 	t_ant *ant = malloc(sizeof(t_ant) * (ants_nb + 1));

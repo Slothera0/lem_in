@@ -3,8 +3,6 @@
 #include "libft.h"
 #include "get_next_line.h"
 
-#include <stdio.h>
-
 t_vector	*create_path(char **split_line, t_vector *nodes);
 void 		free_path(void *data);
 
@@ -38,9 +36,7 @@ t_vector	*read_ants_path(t_vector *nodes)
 		if (!path)	
 		{
 			for(unsigned int i = 0; i < paths->size; i++)
-			{
 				vec_iter(paths->array[i], free_path);
-			}
 			vec_iter(paths, vec_free);
 			vec_free(paths);
 			get_next_line(-1);

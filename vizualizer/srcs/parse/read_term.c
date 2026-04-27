@@ -29,7 +29,9 @@ t_lem_in *read_term()
 		perror("ERROR");
 		exit(1);
 	}
+
 	data->nb_ants = get_nb_ant();
+
 	if (data->nb_ants == 0)
 	{
 		free(data);
@@ -43,6 +45,7 @@ t_lem_in *read_term()
 	
 	parse_data();
 	data->node = nodes;
+
 	if (!data->node)
 	{
 		free(data);
@@ -165,7 +168,5 @@ static void	parse_link(char *line)
 	if (ret == MALLOC_ERROR)
 		get_next_line(-1);
 	else if (ret == PARSE_ERROR)
-	{
 		errno = PARSE_ERROR;
-	}
 }

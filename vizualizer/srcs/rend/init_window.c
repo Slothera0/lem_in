@@ -12,7 +12,8 @@ int init_window(t_rend *rend_adr)
 	t_rend rend = *rend_adr;
 	
 	rend.data.dpy = XOpenDisplay(NULL);
-	if (!rend.data.dpy) {
+	if (!rend.data.dpy)
+	{
 		fprintf(stderr, "Could not open display\n");
 		return (1);
 	}
@@ -20,7 +21,8 @@ int init_window(t_rend *rend_adr)
 	int screen = DefaultScreen(rend.data.dpy);	
 
 	rend.data.vi = init_visual(rend.data.dpy, screen);
-	if (!rend.data.vi) {
+	if (!rend.data.vi)
+	{
 		XCloseDisplay(rend.data.dpy);
 		return (1);
 	}
@@ -28,7 +30,7 @@ int init_window(t_rend *rend_adr)
 	rend.data.cmap = XCreateColormap(rend.data.dpy, RootWindow(rend.data.dpy, screen), rend.data.vi->visual, AllocNone);
 	XSetWindowAttributes swa;
 	swa.colormap = rend.data.cmap;
-	swa.event_mask = ExposureMask | KeyPressMask | StructureNotifyMask | ButtonPressMask | ButtonReleaseMask;
+	swa.event_mask = ExposureMask | KeyPressMask | StructureNotifyMask | ButtonPressMask;
 	rend.data.win = XCreateWindow(rend.data.dpy, RootWindow(rend.data.dpy, screen), 0, 0, WIDTH, HEIGHT, 0, rend.data.vi->depth, InputOutput, rend.data.vi->visual, CWColormap | CWEventMask, &swa);
 	XStoreName(rend.data.dpy, rend.data.win, WINDOW_TITLE);
 	XMapWindow(rend.data.dpy, rend.data.win);
@@ -42,7 +44,8 @@ int init_window(t_rend *rend_adr)
 	XSetWMNormalHints(rend.data.dpy, rend.data.win, &hints);
 
 	rend.data.ctx = glXCreateContext(rend.data.dpy, rend.data.vi, NULL, GL_TRUE);
-	if (!rend.data.ctx) {
+	if (!rend.data.ctx)
+	{
 		fprintf(stderr, "Failed to create GLX context\n");
 		XDestroyWindow(rend.data.dpy, rend.data.win);
 		XFreeColormap(rend.data.dpy, rend.data.cmap);

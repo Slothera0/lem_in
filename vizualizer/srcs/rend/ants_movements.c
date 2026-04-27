@@ -2,8 +2,6 @@
 #include "vector.h"
 #include "node.h"
 
-#include <stdio.h>
-
 void 	put_ant(t_rend rend, float x, float y);
 void 	calculate_ant_step(t_rend rend, t_vector *path, double turn_progress);
 int 	ants_on_path(t_ant *ant, t_vector *path);
@@ -24,9 +22,7 @@ void	ants_movements(t_rend rend)
 	t_vector *path = rend.ant_paths->array[turn];
 
 	if (turn_progress == 0 || rend.input.speed != last_speed)
-	{
 		calculate_ant_step(rend, path, turn_progress);
-	}
 
 	last_speed = rend.input.speed;
 

@@ -4,8 +4,6 @@
 #include "lem_in.h"
 #include "node.h"
 
-#include <stdio.h>
-
 void	clean_rend(t_rend *rend);
 void	load_map(t_rend rend, t_lem_in *data);
 void	ants_movements(t_rend rend);
@@ -25,9 +23,11 @@ int start_rend(t_rend rend, t_lem_in *data)
 
 	while (1) 
 	{
-		while (XPending(rend.data.dpy)) {
+		while (XPending(rend.data.dpy))
+		{
 			XNextEvent(rend.data.dpy, &xev);
-			if (xev.type == ConfigureNotify) {
+			if (xev.type == ConfigureNotify)
+			{
 				XConfigureEvent xce = xev.xconfigure;
 				rend.width = xce.width;
 				rend.height = xce.height;

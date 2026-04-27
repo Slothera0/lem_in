@@ -1,5 +1,4 @@
 #include "rend.h"
-#include <stdio.h>
 
 static void 	play_button(t_rend *rend);
 static void 	pause_button(t_rend *rend);
@@ -10,7 +9,6 @@ static void		reset_button(t_rend *rend);
 
 void menu(t_rend *rend)
 {
-	(void)rend;
 	glColor4f(NODE_COLOR);
 	glBegin(GL_QUADS);
 		glVertex2f(-1 , 0.80);

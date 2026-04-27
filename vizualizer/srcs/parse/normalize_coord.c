@@ -1,8 +1,6 @@
 #include "node.h"
 #include "vector.h"
 
-#include <stdio.h>
-
 float	normalize_coord(t_vector *nodes)
 {
 	float min_x = get_minX_coord(nodes);

@@ -2,8 +2,6 @@
 #include "vector.h"
 #include "node.h"
 
-#include <stdio.h>
-
 void calculate_ant_step(t_rend rend, t_vector *path, double turn_progress)
 {
 	for (unsigned int i = 0; rend.ants[i].id != -1; i++)

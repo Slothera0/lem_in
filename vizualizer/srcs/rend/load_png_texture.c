@@ -66,8 +66,10 @@ GLuint load_png_texture(const char *path, int *out_w, int *out_h)
 	png_bytep *rows = (png_bytep*)malloc(sizeof(png_bytep) * height);
 	int rowbytes = png_get_rowbytes(png, info);
 	unsigned char *image_data = (unsigned char*)malloc(rowbytes * height);
-	if (!rows || !image_data) {
-		free(rows); free(image_data);
+	if (!rows || !image_data)
+	{
+		free(rows);
+		free(image_data);
 		png_destroy_read_struct(&png, &info, NULL);
 		fclose(fp);
 		return 0;

@@ -5,8 +5,6 @@
 #define M_PI (3.14159265358979323846264338327950288)
 #endif
 
-#include <stdio.h>
-
 void put_node(t_rend rend, float x, float y, t_room_type type)
 {
 	int segments = 32;
@@ -31,4 +29,3 @@ void put_node(t_rend rend, float x, float y, t_room_type type)
 	}
 	glEnd();
 }
-

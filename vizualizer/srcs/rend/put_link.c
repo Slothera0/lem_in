@@ -1,5 +1,4 @@
 #include "rend.h"
-#include <stdio.h>
 
 void put_link(t_rend rend, float x1, float y1, float x2, float y2)
 {
