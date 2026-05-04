@@ -14,6 +14,7 @@ void	print_node(void *data);
 void	print_way(void *data);
 t_node 	*get_start(t_vector *vector);
 void print_all_path(t_vector *all_path);
+void free_distrib_ants(void *data);
 
 int	main()
 {
@@ -41,6 +42,9 @@ int	main()
 
 	// vec_iter(all_way, vec_free);
 	// vec_free(all_way);
+	free(distrib);
+	vec_iter(path, vec_free);
+	vec_free(path);
 	vec_iter(nodes, free_node);
 	vec_free(nodes);
 	free(data);

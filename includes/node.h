@@ -17,9 +17,9 @@ typedef struct s_node
     int         x;
     int         y;
     t_room_type type;
-	int visited;
-	int blocked;
+    void        *door;
 	struct s_node *parent;
+
 }   t_node;
 
 t_node  *get_start(t_vector *vector);

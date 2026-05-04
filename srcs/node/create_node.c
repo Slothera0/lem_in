@@ -32,7 +32,7 @@ t_vector *create_node(t_vector *nodes, char **args, t_room_type type)
 	new->name = ft_strdup(args[0]);
 	if (!new->name)
 	{
-		free(new->links);
+		vec_free(new->links);
 		free(new);
 		return (NULL);
 	}

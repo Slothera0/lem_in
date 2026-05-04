@@ -18,7 +18,7 @@ t_door *create_door(t_node *room)
     door->out = create_fnode(room);
     if(!door->out)
     {
-        free(door->in);
+        free_fnode(door->in);
         free(door);
         return (NULL);
     }

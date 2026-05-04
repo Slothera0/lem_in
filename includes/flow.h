@@ -17,6 +17,10 @@ t_door *create_door(t_node *room);
 t_door *get_door_by_room(t_node *room, t_vector *doors);
 t_vector *build_flow_graph(t_lem_in *data, t_door **start_door, t_door **end_door);
 t_vector *bfs(t_lem_in *data);
+void free_edge(void *data);
+void free_fnode(void *data);
+void free_door(void *data);
+void free_all(void *data);
 
 typedef struct s_edge
 {
