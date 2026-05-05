@@ -1,5 +1,5 @@
-#include "../../includes/flow.h"
-#include "../../includes/lem_in.h"
+#include "flow.h"
+#include "lem_in.h"
 #include <limits.h>
 
 

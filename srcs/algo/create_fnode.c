@@ -1,4 +1,4 @@
-#include "../../includes/flow.h"
+#include "includes/flow.h"
 
 
 t_fnode *create_fnode(t_node *room)

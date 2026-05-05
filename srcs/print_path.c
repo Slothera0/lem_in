@@ -1,5 +1,5 @@
-#include "../srcs/vector/vector.h"
-#include "../includes/node.h"
+#include "vector.h"
+#include "node.h"
 #include <stdio.h>
 
 
