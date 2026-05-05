@@ -1,6 +1,8 @@
 #include "../../includes/flow.h"
 #include "../../includes/lem_in.h"
 
+void link_edges(t_lem_in *data, t_door **start_door, t_door **end_door);
+
 void add_flow_edge(t_fnode *from, t_fnode *to, int cap)
 {
     t_edge *forward;
@@ -38,7 +40,6 @@ void add_flow_edge(t_fnode *from, t_fnode *to, int cap)
     tmp = vec_append(to->edges, reverse);
     if (!tmp)
     {
-        free_edge(from->edges);
         free_edge(reverse);
         return ;
     }
@@ -46,32 +47,14 @@ void add_flow_edge(t_fnode *from, t_fnode *to, int cap)
 
 }
 
-t_door *get_door_by_room(t_node *room, t_vector *doors)
-{
-    t_door *door;
-
-    for (unsigned int i = 0; i < doors->size; i++)
-    {
-        door = doors->array[i];
-        if (door->in->room == room || door->out->room == room)
-        {
-            return (door);
-        }
-        
-    }
-    return (NULL);
-}
-
 t_vector *build_flow_graph(t_lem_in *data, t_door **start_door, t_door **end_door)
 {
     t_vector *graph;
     t_vector *tmp;
     t_door *doorA;
-    t_door *doorB;
     t_node *node;
-    t_node *node_link;
 
-    graph = vec_create(10);
+    graph = vec_create(data->node->size);
     if (!graph)
         return (NULL);
     for (unsigned int i = 0; i < data->node->size; i++)
@@ -92,10 +75,16 @@ t_vector *build_flow_graph(t_lem_in *data, t_door **start_door, t_door **end_doo
         }
         graph = tmp;
     }
+    link_edges(data, start_door, end_door);
+    return (graph);
+}
 
-    *start_door = NULL;
-    *end_door = NULL;
-
+void link_edges(t_lem_in *data, t_door **start_door, t_door **end_door)
+{
+    t_door *doorA;
+    t_door *doorB;
+    t_node *node;
+    t_node *node_link;
 
     for (unsigned int i = 0; i < data->node->size; i++)
     {
@@ -119,6 +108,4 @@ t_vector *build_flow_graph(t_lem_in *data, t_door **start_door, t_door **end_doo
             add_flow_edge(doorA->out, doorB->in, 1);
         }
     }
-
-    return (graph);
 }

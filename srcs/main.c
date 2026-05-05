@@ -28,9 +28,6 @@ int	main()
 
 	nodes = data->node;
 
-	//vec_iter(nodes, print_node);
-	//print_node(get_start(nodes));
-
 	path = bfs(data);
 	if (!path)
     	return (1);

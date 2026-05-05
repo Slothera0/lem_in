@@ -1,5 +1,4 @@
 #include "../../includes/distrib_ants.h"
-#include "../../includes/lem_in.h"
 #include "../../includes/node.h"
 #include "../../srcs/vector/vector.h"
 #include <limits.h>
@@ -15,8 +14,6 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
     unsigned int move;
     finish_count = 0;
 
-
-
     while(finish_count < assigned_ants)
     {
         unsigned int max_step;
@@ -28,25 +25,16 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
             if (distrib[i].path && !distrib[i].arrived && distrib[i].path_step > max_step)
                 max_step = distrib[i].path_step;
         }
-        for (unsigned int step = max_step; step > 0; step--)
+        for (unsigned int step = max_step + 1; step > 0; step--)
         {
-            
             for (unsigned int i = 0; i < assigned_ants; i++)
             {
                 t_vector *path;
                 t_node *room;
 
-                if(distrib[i].arrived || !distrib[i].path)
-                    continue;
-                if(distrib[i].path_step != step)
+                if(distrib[i].arrived || distrib[i].path_step != step - 1)
                     continue;
                 path = distrib[i].path;
-
-                if(!path || path->size == 0)
-                    continue;
-                
-                if(distrib[i].path_step + 1 >= path->size)
-                    continue;
                 room = (t_node *)path->array[distrib[i].path_step + 1];
                 if (room->type == END || room_is_empty(distrib, assigned_ants, room) == 1)
                 {
@@ -58,36 +46,6 @@ int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants)
                         distrib[i].arrived = 1;
                         finish_count++;
                     }
-                }
-            }
-            
-        }
-
-        for (unsigned int i = 0; i < assigned_ants; i++)
-        {
-            t_vector *path;
-            t_node *room;
-
-            if(distrib[i].arrived || !distrib[i].path)
-                continue;
-            path = distrib[i].path;
-            if(!path || path->size == 0)
-                continue;
-            
-            if(distrib[i].path_step + 1 >= path->size)
-                continue;
-            if (distrib[i].path_step != 0)
-                continue;
-            room = (t_node *)path->array[distrib[i].path_step + 1];
-            if (room->type == END || room_is_empty(distrib, assigned_ants, room) == 1)
-            {
-                print_ant_move(distrib[i].ants_id, room->name);
-                distrib[i].path_step += 1;
-                move = 1;
-                if (distrib[i].path_step + 1 >= path->size)
-                {
-                    distrib[i].arrived = 1;
-                    finish_count++;
                 }
             }
         }

@@ -1,7 +1,6 @@
 #include "../../includes/flow.h"
 #include "../../includes/lem_in.h"
 #include <limits.h>
-#include <stdio.h>
 
 
 void reset_fnodes(t_vector *graph);
@@ -125,15 +124,14 @@ unsigned int best_k_path(t_vector *all_path, unsigned int nb_ants)
 }
 
 
-static t_vector *bfs_flow(t_door *start_door, t_door *end_door)
+static t_vector *bfs_flow(t_door *start_door, t_door *end_door, unsigned int *head)
 {
     t_vector *queue;
     t_vector *tmp;
     t_fnode *current;
     t_edge *edge;
-    unsigned int head;
 
-    head = 0;
+    *head = 0;
     queue = vec_create(10);
     if(!queue)
         return (NULL);
@@ -146,10 +144,10 @@ static t_vector *bfs_flow(t_door *start_door, t_door *end_door)
     }
     queue = tmp;
 
-    while(queue->size > head)
+    while(queue->size > *head)
     {
-        current = (t_fnode *)queue->array[head];
-        head++;
+        current = (t_fnode *)queue->array[*head];
+        (*head)++;
         if(current == end_door->in)
             return (queue);
         for (unsigned int i = 0; i < current->edges->size; i++)
@@ -184,8 +182,13 @@ t_vector *bfs(t_lem_in *data)
     t_fnode *current;
     t_edge *edge;
     t_vector *tmp;
+    unsigned int head;
     unsigned int path_good;
+    unsigned int nb_paths_found;
 
+    nb_paths_found = 0;
+    start_door = NULL;
+    end_door = NULL;
     graph = build_flow_graph(data, &start_door,&end_door);
     if (!graph)
         return (NULL);
@@ -198,9 +201,15 @@ t_vector *bfs(t_lem_in *data)
     while(1)
     {
         reset_fnodes(graph);
-        queue  = bfs_flow(start_door, end_door);
+        queue  = bfs_flow(start_door, end_door, &head);
         if(!queue)
             break;
+        nb_paths_found++;
+        if (nb_paths_found * (nb_paths_found + 1) > data->nb_ants * 4)
+        {
+            vec_free(queue);
+            break;
+        }
         vec_free(queue);
         current = end_door->in;
         while (current != start_door->out)
@@ -209,8 +218,7 @@ t_vector *bfs(t_lem_in *data)
             edge->flow += 1;
             edge->rev->flow -= 1;
             current = edge->rev->to;
-        }  
-        nb_path += 1;
+        }
     }
     edge = (t_edge *)start_door->out->edges->array[0];
     while(has_positive_flow_path(start_door))
