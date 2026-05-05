@@ -18,7 +18,8 @@ SOURCES = 	create_link.c \
 			get_maxX_coord.c \
 			get_maxY_coord.c \
 			get_minX_coord.c \
-			get_minY_coord.c
+			get_minY_coord.c \
+			sort_node.c
 
 LIBFT_PATH = ../libft
 LIBFT = $(LIBFT_PATH)/libft.a

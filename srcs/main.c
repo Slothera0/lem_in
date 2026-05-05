@@ -1,23 +1,16 @@
-#include "../includes/node.h"
-#include "../includes/lem_in.h"
-#include "../includes/flow.h"
-#include "../srcs/vector/vector.h"
-#include "../includes/distrib_ants.h"
+#include "node.h"
+#include "lem_in.h"
+#include "flow.h"
+#include "vector.h"
+#include "distrib_ants.h"
 #include <stdlib.h>
 
-t_lem_in	*read_term();
-<<<<<<< HEAD
-t_vector	*find_all_way(t_lem_in *data);
-=======
-void		free_node(void *data);
-t_distrib_ants *distrib_ants(t_lem_in *data, t_vector *all_path);
-int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants);
->>>>>>> main
+t_lem_in		*read_term();
+t_distrib_ants	*distrib_ants(t_lem_in *data, t_vector *all_path);
+int				print_walk(t_distrib_ants *distrib, unsigned int assigned_ants);
 
 void	print_way(void *data);
-t_node 	*get_start(t_vector *vector);
-void print_all_path(t_vector *all_path);
-void free_distrib_ants(void *data);
+void	print_all_path(t_vector *all_path);
 
 int	main()
 {
@@ -38,10 +31,7 @@ int	main()
 	if (!distrib)
 		return (1);
 	print_walk(distrib, data->nb_ants);
-	//print_all_path(path);
 
-	// vec_iter(all_way, vec_free);
-	// vec_free(all_way);
 	free(distrib);
 	vec_iter(path, vec_free);
 	vec_free(path);

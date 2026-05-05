@@ -44,5 +44,6 @@ float		get_minX_coord(t_vector *nodes);
 float		get_maxX_coord(t_vector *nodes);
 float		get_minY_coord(t_vector *nodes);
 float		get_maxY_coord(t_vector *nodes);
+void		sort_nodes(t_vector *vec);
 
 #endif
