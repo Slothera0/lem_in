@@ -1,66 +1,53 @@
 # lem-in
 
-Projet d'algorithmie de l'ecole 42.
+Projet d'algorithmie de l'école 42. Le programme lit une fourmilière sur l'entrée standard et trouve le chemin optimal pour faire traverser toutes les fourmis de `##start` vers `##end` en un minimum de tours.
 
-Le but de `lem-in` est de lire une fourmiliere depuis l'entree standard, de trouver la meilleure facon de faire traverser toutes les fourmis de `start` vers `end`, puis d'afficher les mouvements en respectant exactement le format demande par le sujet.
+## Prérequis
 
-## Objectif
+- Compilateur C gcc
+- `make`
+- Système Unix/Linux/macOS
 
-Le programme doit :
-
-- lire le nombre de fourmis ;
-- parser les salles et les liens ;
-- construire un graphe representant la fourmiliere ;
-- trouver un ou plusieurs chemins utiles entre `start` et `end` ;
-- repartir les fourmis de facon optimale ;
-- afficher la simulation tour par tour.
-
-Le critere principal est de minimiser le nombre total de tours.
-
-## Etat actuel du projet
+Aucune bibliothèque externe. Toutes les dépendances sont incluses dans le projet (`libft`, `get_next_line`, `vector`).
 
 ## Compilation
 
 ```bash
-make
-```
-
-Regles disponibles :
-
-- `make`
-- `make clean`
-- `make fclean`
-- `make re`
-
-L'executable genere est :
-
-```bash
-./lem_in
+make        # compile le projet
+make re     # recompile from scratch
+make clean  # supprime les .o
+make fclean # supprime les .o et l'exécutable
 ```
 
 ## Utilisation
 
-Exemple :
-
 ```bash
 ./lem_in < maps/simple.txt
+./lem_in < maps/huge_4000.txt
 ```
 
-## Format d'entree
+Le programme lit sur l'entrée standard et affiche les mouvements tour par tour sur la sortie standard. Les erreurs sont affichées sur la sortie d'erreur.
 
-Le programme lit sur l'entree standard :
+## Format d'entrée
 
-1. le nombre de fourmis ;
-2. les salles au format `name x y` ;
-3. les liens au format `name1-name2`.
+## Architecture du projet
 
-Regles importantes du sujet :
+## Algorithme
 
-- `##start` designe la salle de depart ;
-- `##end` designe la salle d'arrivee ;
-- les lignes commencant par `#` sont des commentaires ;
-- un nom de salle ne commence jamais par `L` ni `#` ;
-- les coordonnees sont des entiers ;
-- en cas d'entree invalide, le programme doit afficher `ERROR`.
+### Parsing
 
+### Construction du graphe de flot
 
+### Edmonds-Karp (BFS)
+
+### Sélection des chemins
+Grace au fichier distrib_ants je distribue les fourmies sur dans les differents path en calculant le cout le moins elever pour allouer la forumis a ce chemins 
+### Distribution des fourmis
+La distribution des fourmis est grer dans print_walk je recherhce la fourmis la plus avancer dans les salles quelles doit passer pour arriver a la fin et pouvoir les faire avancer sans restraindre les autre forumis qui veulent avancer dans leur prochaine room
+### Affichage
+
+## Optimisations
+
+## Gestion des erreurs et mémoire
+
+## Tests
