@@ -1,5 +1,6 @@
 #include "vector.h"
 #include "node.h"
+#include "libft.h"
 
 void	sort_nodes(t_vector *vec)
 {

@@ -27,6 +27,8 @@ typedef struct s_node
 	float 			y;
 	t_room_type 	type;
 	int				visited;
+	void        *door;
+	struct s_node *parent;
 } t_node ;
 
 t_node		*get_node(t_vector *vector, char *name);

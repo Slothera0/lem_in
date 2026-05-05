@@ -1,6 +1,6 @@
-#include "includes/distrib_ants.h"
-#include "includes/lem_in.h"
-#include "srcs/vector/vector.h"
+#include "distrib_ants.h"
+#include "lem_in.h"
+#include "vector.h"
 #include <limits.h>
 #include <stdlib.h>
 

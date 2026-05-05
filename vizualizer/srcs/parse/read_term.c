@@ -106,6 +106,8 @@ static void parse_data()
 		line = get_next_line(0);
 	}
 
+	sort_nodes(nodes);
+
 	while (line)
 	{
 		parse_link(line);
