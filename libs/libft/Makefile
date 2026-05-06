@@ -57,7 +57,8 @@ ft_putchar.c \
 ft_putnbr_base.c \
 ft_putstr.c \
 is_a_num.c \
-remove_endline.c
+remove_endline.c \
+ft_put_vecstr.c
 
 OBJS = $(SOURCES:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)
