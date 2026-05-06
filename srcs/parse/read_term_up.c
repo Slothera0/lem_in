@@ -78,11 +78,21 @@ static void parse_data()
 	map = vec_create(50);
 
 	if (!map)
+	{
+		vec_free(nodes);
 		return ;
+	}
 	
 	while (line)
 	{
 		map = vec_append(map, line);
+		if (!map)
+		{
+			vec_iter(nodes, free_node);
+			vec_free(nodes);
+			nodes = NULL;
+			return ;
+		}
 		type = parse_nodes(line, type);
 		if (errno != 0)
 		{
@@ -94,6 +104,8 @@ static void parse_data()
 			vec_iter(nodes, free_node);
 			vec_free(nodes);
 			nodes = NULL;
+			vec_iter(map, free);
+			vec_free(map);
 			return ;
 		}
 		line = get_next_line(0);
@@ -112,6 +124,8 @@ static void parse_data()
 				vec_iter(nodes, free_node);
 				vec_free(nodes);
 				nodes = NULL;
+				vec_iter(map, free);
+				vec_free(map);
 				return ;
 			}
 			return ;
