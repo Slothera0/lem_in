@@ -17,6 +17,7 @@ static t_room_type 	parse_nodes(char *line, t_room_type type);
 static void			parse_link(char *line);
 
 static t_vector *nodes;
+static t_vector *map;
 
 t_lem_in *read_term()
 {
@@ -73,8 +74,15 @@ static void parse_data()
 	
 	if (!nodes)
 		return ;
+
+	map = vec_create(50);
+
+	if (!map)
+		return ;
+	
 	while (line)
 	{
+		map = vec_append(map, line);
 		type = parse_nodes(line, type);
 		if (errno != 0)
 		{
@@ -83,13 +91,11 @@ static void parse_data()
 				errno = 0;
 				break ;
 			}
-			free(line);
 			vec_iter(nodes, free_node);
 			vec_free(nodes);
 			nodes = NULL;
 			return ;
 		}
-		free(line);
 		line = get_next_line(0);
 	}
 
@@ -97,10 +103,10 @@ static void parse_data()
 
 	while (line)
 	{
+		map = vec_append(map, line);
 		parse_link(line);
 		if (errno != 0)
 		{
-			free(line);
 			if (errno > 0)
 			{
 				vec_iter(nodes, free_node);
@@ -110,7 +116,6 @@ static void parse_data()
 			}
 			return ;
 		}
-		free(line);
 		line = get_next_line(0);
 	}
 	return ;
