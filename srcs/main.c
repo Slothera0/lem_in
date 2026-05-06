@@ -30,6 +30,7 @@ int	main()
 	distrib = distrib_ants(data, path);
 	if (!distrib)
 		return (1);
+	vec_iter(data->map, ft_put_vecstr);
 	print_walk(distrib, data->nb_ants);
 
 	free(distrib);
@@ -37,6 +38,8 @@ int	main()
 	vec_free(path);
 	vec_iter(nodes, free_node);
 	vec_free(nodes);
+	vec_iter(data->map, free);
+	vec_free(data->map);
 	free(data);
 	return (0);
 }
