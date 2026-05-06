@@ -52,6 +52,7 @@ t_lem_in *read_term()
 			ft_putstr_fd("ERROR\n", 2);
 		exit(1);
 	}
+	data->map = map;
 	
 	if (!one_start(nodes) || !one_end(nodes))
 	{
