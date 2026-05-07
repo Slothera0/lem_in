@@ -1,11 +1,10 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP
-INCLUDES = -I ./includes -I ./libs/libft -I ./libs/vector
+INCLUDES = -I ./includes -I ./libs/libft -I ./libs/vector -I ./libs/node
 
 F_OBJS = .objs/
 F_SRCS = srcs/
 F_PARSE = $(F_SRCS)parse/
-F_NODE = $(F_SRCS)node/
 F_ALGO = $(F_SRCS)algo/
 
 SRCS = 	$(F_SRCS)main.c \
@@ -13,8 +12,7 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_SRCS)print_path.c \
 		$(F_SRCS)print_way.c \
 		$(F_SRCS)print_all_path.c \
-		$(F_NODE)print_node.c $(F_NODE)get_node_name.c $(F_NODE)create_node.c $(F_NODE)create_link.c $(F_NODE)get_node.c  $(F_NODE)free_node.c $(F_NODE)get_start.c $(F_NODE)get_node_type.c \
-       	$(F_PARSE)read_term.c $(F_PARSE)one_start_end.c $(F_PARSE)is_a_num.c $(F_PARSE)get_nb_ant.c $(F_PARSE)set_type.c \
+       	$(F_PARSE)read_term.c $(F_PARSE)one_start_end.c $(F_PARSE)get_nb_ant.c $(F_PARSE)set_type.c \
 		$(F_ALGO)distrib_ants.c $(F_ALGO)print_walk.c \
 		$(F_ALGO)bfs_flow.c $(F_ALGO)add_flow_edge.c $(F_ALGO)create_door.c $(F_ALGO)create_fnode.c $(F_ALGO)free_edge.c $(F_ALGO)free_fnode.c $(F_ALGO)free_door.c $(F_ALGO)free_all.c $(F_ALGO)sort_path.c $(F_ALGO)calculate_score.c $(F_ALGO)reset_remove_path.c $(F_ALGO)rebuild_path.c $(F_ALGO)edmonds_karp.c $(F_ALGO)get_path.c
 		
@@ -23,11 +21,10 @@ DEPS = $(OBJS:.o=.d)
 
 NAME = lem_in
 
-LIBFT_PATH = ./libs/libft
-LIBFT = $(LIBFT_PATH)/libft.a
+NODE_PATH = ./libs/node
+NODE = $(NODE_PATH)/node.a
 
-VECTOR_PATH = ./libs/vector
-VECTOR = $(VECTOR_PATH)/vector.a
+VIZUALIZER = ./vizualizer
 
 TOTAL := $(words $(SRCS))
 COUNT = 0
@@ -42,15 +39,12 @@ all:
 	@echo "$(BLUE)🔧 Compiling lem_in...$(RESET)"
 	@$(MAKE) -s $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(VECTOR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(VECTOR) -o $(NAME)
+$(NAME): $(OBJS) $(NODE)
+	$(CC) $(CFLAGS) $(OBJS) $(NODE) -o $(NAME)
 	@echo "$(GREEN)✔ $(NAME) created successfully!$(RESET)"
 
-$(LIBFT):
-	@$(MAKE) -sC $(LIBFT_PATH)
-
-$(VECTOR):
-	@$(MAKE) -sC $(VECTOR_PATH)
+$(NODE):
+	@$(MAKE) -sC $(NODE_PATH)
 
 $(F_OBJS)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -69,19 +63,22 @@ $(F_OBJS)%.o: %.c
 clean:
 	@echo "$(YELLOW)🧹 Cleaning $(NAME) object files...$(RESET)"
 	@rm -rf $(F_OBJS)
-	@$(MAKE) -sC $(LIBFT_PATH) clean
-	@$(MAKE) -sC $(VECTOR_PATH) clean
+	@$(MAKE) -sC $(NODE_PATH) clean
+	@$(MAKE) -sC $(VIZUALIZER) clean
 	@echo "$(GREEN)✔ Clean complete$(RESET)"
 
 fclean: clean
 	@echo "$(YELLOW)🗑 Removing $(NAME)...$(RESET)"
 	@rm -f $(NAME)
-	@$(MAKE) -sC $(LIBFT_PATH) fclean
-	@$(MAKE) -sC $(VECTOR_PATH) fclean
+	@$(MAKE) -sC $(NODE_PATH) fclean
+	@$(MAKE) -sC $(VIZUALIZER) fclean
 	@echo "$(GREEN)✔ Full clean complete$(RESET)"
 
 re: fclean all
 
+bonus: all
+	@$(MAKE) -sC $(VIZUALIZER)
+
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

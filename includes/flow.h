@@ -2,10 +2,10 @@
 # define FLOW_H
 
 
-#include "../includes/vector.h"
-#include "../includes/node.h"
-#include "../includes/lem_in.h"
-#include <limits.h>
+#include "vector.h"
+#include "node.h"
+#include "lem_in.h"
+
 
 typedef struct s_edge t_edge;
 typedef struct s_fnode t_fnode;

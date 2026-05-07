@@ -1,7 +1,7 @@
 #ifndef DISTRIB_ANTS_H
 # define DISTRIB_ANTS_H
 
-# include "../libs/vector/vector.h"
+# include "vector.h"
 
 typedef struct s_distrib_ants
 {

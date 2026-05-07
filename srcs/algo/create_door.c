@@ -1,4 +1,4 @@
-#include "../../includes/flow.h"
+#include "flow.h"
 #include <limits.h>
 
 t_door *create_door(t_node *room)

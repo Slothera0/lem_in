@@ -2,8 +2,6 @@
 #include "vector.h"
 #include "libft.h"
 
-char	*get_node_name(t_node *node);
-
 t_node *get_node(t_vector *vector, char *name)
 {
 	int		lo;

@@ -1,20 +1,19 @@
-#include "../includes/node.h"
-#include "../includes/lem_in.h"
-#include "../includes/flow.h"
-#include "../libs/vector/vector.h"
-#include "../includes/distrib_ants.h"
+#include "node.h"
+#include "lem_in.h"
+#include "flow.h"
+#include "vector.h"
+#include "distrib_ants.h"
+#include "libft.h"
 #include <stdlib.h>
 
-t_lem_in	*read_term();
-void		free_node(void *data);
-t_distrib_ants *distrib_ants(t_lem_in *data, t_vector *all_path);
-int print_walk(t_distrib_ants *distrib, unsigned int assigned_ants);
+#include <stdio.h>
 
-void	print_node(void *data);
+t_lem_in		*read_term();
+t_distrib_ants	*distrib_ants(t_lem_in *data, t_vector *all_path);
+int				print_walk(t_distrib_ants *distrib, unsigned int assigned_ants);
+
 void	print_way(void *data);
-t_node 	*get_start(t_vector *vector);
-void print_all_path(t_vector *all_path);
-void free_distrib_ants(void *data);
+void	print_all_path(t_vector *all_path);
 
 int	main()
 {
@@ -46,6 +45,8 @@ int	main()
 		free(data);
 		return (1);
 	}
+	vec_iter(data->map, ft_put_vecstr);
+	ft_putchar_fd('\n', 1);
 	print_walk(distrib, data->nb_ants);
 
 	free(distrib);
@@ -53,6 +54,8 @@ int	main()
 	vec_free(path);
 	vec_iter(nodes, free_node);
 	vec_free(nodes);
+	vec_iter(data->map, free);
+	vec_free(data->map);
 	free(data);
 	return (0);
 }

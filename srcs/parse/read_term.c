@@ -7,41 +7,17 @@
 #include <errno.h>
 #include <stdio.h>
 
-int 		create_link(t_vector *nodes, char *args);
-t_vector 	*create_node(t_vector *nodes, char **args, t_room_type type);
-void		free_node(void *data);
 int			one_end(t_vector *nodes);
 int			one_start(t_vector *nodes);
 t_room_type	set_type(char *line);
 int			get_nb_ant();
-char		*get_node_name(t_node *node);
-
-static void	sort_nodes(t_vector *vec)
-{
-	int		i;
-	int		j;
-	void	*key;
-
-	i = 1;
-	while (i < (int)vec->size)
-	{
-		key = vec->array[i];
-		j = i - 1;
-		while (j >= 0 && ft_strcmp(get_node_name(vec->array[j]),get_node_name(key)) > 0)
-		{
-			vec->array[j + 1] = vec->array[j];
-			j--;
-		}
-		vec->array[j + 1] = key;
-		i++;
-	}
-}
 
 static void			parse_data();
 static t_room_type 	parse_nodes(char *line, t_room_type type);
 static void			parse_link(char *line);
 
 static t_vector *nodes;
+static t_vector *map;
 
 t_lem_in *read_term()
 {
@@ -76,6 +52,7 @@ t_lem_in *read_term()
 			ft_putstr_fd("ERROR\n", 2);
 		exit(1);
 	}
+	data->map = map;
 	
 	if (!one_start(nodes) || !one_end(nodes))
 	{
@@ -98,8 +75,25 @@ static void parse_data()
 	
 	if (!nodes)
 		return ;
+
+	map = vec_create(50);
+
+	if (!map)
+	{
+		vec_free(nodes);
+		return ;
+	}
+	
 	while (line)
 	{
+		map = vec_append(map, line);
+		if (!map)
+		{
+			vec_iter(nodes, free_node);
+			vec_free(nodes);
+			nodes = NULL;
+			return ;
+		}
 		type = parse_nodes(line, type);
 		if (errno != 0)
 		{
@@ -108,13 +102,13 @@ static void parse_data()
 				errno = 0;
 				break ;
 			}
-			free(line);
 			vec_iter(nodes, free_node);
 			vec_free(nodes);
 			nodes = NULL;
+			vec_iter(map, free);
+			vec_free(map);
 			return ;
 		}
-		free(line);
 		line = get_next_line(0);
 	}
 
@@ -125,18 +119,19 @@ static void parse_data()
 		parse_link(line);
 		if (errno != 0)
 		{
-			free(line);
 			if (errno > 0)
 			{
 				vec_iter(nodes, free_node);
 				vec_free(nodes);
 				nodes = NULL;
+				vec_iter(map, free);
+				vec_free(map);
 				return ;
 			}
 			return ;
 		}
-		free(line);
 		line = get_next_line(0);
+		map = vec_append(map, line);
 	}
 	return ;
 }

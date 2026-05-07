@@ -1,12 +1,7 @@
 #include "vector.h"
 #include "node.h"
 #include "libft.h"
-#include "ft_error.h"
 #include <errno.h>
-
-void	free_node(void *data);
-t_node	*get_node(t_vector *vector, char *name);
-int		is_a_num(char *str);
 
 t_vector *create_node(t_vector *nodes, char **args, t_room_type type)
 {
@@ -47,6 +42,7 @@ t_vector *create_node(t_vector *nodes, char **args, t_room_type type)
 	new->x = ft_atoi(args[1]);
 	new->y = ft_atoi(args[2]);
 	new->type = type;
+	new->visited = 0;
 
 	nodes = vec_append(nodes, new);
 	if (!nodes)	

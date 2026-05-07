@@ -1,5 +1,5 @@
-#include "../../includes/flow.h"
-#include "../../includes/lem_in.h"
+#include "flow.h"
+#include "lem_in.h"
 
 void link_edges(t_lem_in *data, t_door **start_door, t_door **end_door);
 

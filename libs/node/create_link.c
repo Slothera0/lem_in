@@ -1,9 +1,11 @@
+<<<<<<< HEAD:srcs/node/create_link.c
 #include "../../includes/node.h"
 #include "../../libs/vector/vector.h"
+=======
+#include "node.h"
+#include "vector.h"
+>>>>>>> main:libs/node/create_link.c
 #include "libft.h"
-#include "ft_error.h"
-
-t_node *get_node(t_vector *vector, char *name);
 
 int create_link(t_vector *nodes, char *args)
 {
