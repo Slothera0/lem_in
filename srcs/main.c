@@ -3,7 +3,10 @@
 #include "flow.h"
 #include "vector.h"
 #include "distrib_ants.h"
+#include "libft.h"
 #include <stdlib.h>
+
+#include <stdio.h>
 
 t_lem_in		*read_term();
 t_distrib_ants	*distrib_ants(t_lem_in *data, t_vector *all_path);
@@ -31,6 +34,7 @@ int	main()
 	if (!distrib)
 		return (1);
 	vec_iter(data->map, ft_put_vecstr);
+	ft_putchar_fd('\n', 1);
 	print_walk(distrib, data->nb_ants);
 
 	free(distrib);

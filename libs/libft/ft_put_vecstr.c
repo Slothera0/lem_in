@@ -13,4 +13,5 @@ void	ft_put_vecstr(void *data)
 		ft_putchar_fd(s[i], 1);
 		i++;
 	}
+	ft_putchar_fd('\n', 1);
 }
