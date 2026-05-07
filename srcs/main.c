@@ -30,15 +30,24 @@ int	main()
 
 	path = bfs(data);
 	if (!path)
-    	return (1);
+	{
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
+		return (1);
+	}
 	distrib = distrib_ants(data, path);
 	if (!distrib)
+	{
+		vec_iter(path, vec_free);
+		vec_free(path);
+		vec_iter(nodes, free_node);
+		vec_free(nodes);
+		free(data);
 		return (1);
+	}
 	print_walk(distrib, data->nb_ants);
-	//print_all_path(path);
 
-	// vec_iter(all_way, vec_free);
-	// vec_free(all_way);
 	free(distrib);
 	vec_iter(path, vec_free);
 	vec_free(path);

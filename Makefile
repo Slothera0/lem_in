@@ -16,7 +16,7 @@ SRCS = 	$(F_SRCS)main.c \
 		$(F_NODE)print_node.c $(F_NODE)get_node_name.c $(F_NODE)create_node.c $(F_NODE)create_link.c $(F_NODE)get_node.c  $(F_NODE)free_node.c $(F_NODE)get_start.c $(F_NODE)get_node_type.c \
        	$(F_PARSE)read_term.c $(F_PARSE)one_start_end.c $(F_PARSE)is_a_num.c $(F_PARSE)get_nb_ant.c $(F_PARSE)set_type.c \
 		$(F_ALGO)distrib_ants.c $(F_ALGO)print_walk.c \
-		$(F_ALGO)bfs.c $(F_ALGO)add_flow_edge.c $(F_ALGO)create_door.c $(F_ALGO)create_fnode.c $(F_ALGO)free_edge.c $(F_ALGO)free_fnode.c $(F_ALGO)free_door.c $(F_ALGO)free_all.c
+		$(F_ALGO)bfs.c $(F_ALGO)add_flow_edge.c $(F_ALGO)create_door.c $(F_ALGO)create_fnode.c $(F_ALGO)free_edge.c $(F_ALGO)free_fnode.c $(F_ALGO)free_door.c $(F_ALGO)free_all.c $(F_ALGO)sort_path.c $(F_ALGO)calculate_score.c $(F_ALGO)reset_remove_path.c $(F_ALGO)rebuild_path.c
 		
 OBJS = $(SRCS:%.c=$(F_OBJS)%.o)
 DEPS = $(OBJS:.o=.d)

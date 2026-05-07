@@ -5,7 +5,7 @@
 #include "../srcs/vector/vector.h"
 #include "../includes/node.h"
 #include "../includes/lem_in.h"
-
+#include <limits.h>
 
 typedef struct s_edge t_edge;
 typedef struct s_fnode t_fnode;
@@ -21,6 +21,13 @@ void free_edge(void *data);
 void free_fnode(void *data);
 void free_door(void *data);
 void free_all(void *data);
+void sort_path_by_size(t_vector *all_path);
+unsigned int score_k_path(t_vector *all_path, unsigned int k, unsigned int nb_ants);
+unsigned int best_k_path(t_vector *all_path, unsigned int nb_ants);
+void reset_fnodes(t_vector *graph);
+void remove_path_usless(t_vector *all_path, unsigned int k);
+int rebuilt_path(t_door *start_door, t_door *end_door, t_vector **path);
+int has_positive_flow_path(t_door *start_door);
 
 typedef struct s_edge
 {
