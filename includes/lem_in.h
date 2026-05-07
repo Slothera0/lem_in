@@ -1,7 +1,7 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "../srcs/vector/vector.h"
+# include "../libs/vector/vector.h"
 
 typedef struct s_lem_in
 {

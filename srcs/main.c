@@ -1,7 +1,7 @@
 #include "../includes/node.h"
 #include "../includes/lem_in.h"
 #include "../includes/flow.h"
-#include "../srcs/vector/vector.h"
+#include "../libs/vector/vector.h"
 #include "../includes/distrib_ants.h"
 #include <stdlib.h>
 
@@ -28,7 +28,7 @@ int	main()
 
 	nodes = data->node;
 
-	path = bfs(data);
+	path = edmonds_karp(data);
 	if (!path)
 	{
 		vec_iter(nodes, free_node);

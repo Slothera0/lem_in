@@ -1,7 +1,7 @@
 #ifndef NODE_H
 # define NODE_H
 
-# include "../srcs/vector/vector.h"
+# include "../libs/vector/vector.h"
 
 typedef enum e_room_type
 {

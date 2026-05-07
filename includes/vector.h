@@ -1,6 +1,6 @@
 #ifndef INCLUDES_VECTOR_H
 # define INCLUDES_VECTOR_H
 
-# include "../srcs/vector/vector.h"
+# include "../libs/vector/vector.h"
 
 #endif

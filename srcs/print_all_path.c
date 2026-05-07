@@ -1,4 +1,4 @@
-#include "../srcs/vector/vector.h"
+#include "../libs/vector/vector.h"
 #include <stdio.h>
 
 void print_path(t_vector *path);
