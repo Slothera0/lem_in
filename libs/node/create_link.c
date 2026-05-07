@@ -1,5 +1,7 @@
 #include "node.h"
 #include "vector.h"
+#include "node.h"
+#include "vector.h"
 #include "libft.h"
 
 int create_link(t_vector *nodes, char *args)
