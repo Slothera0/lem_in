@@ -19,6 +19,8 @@ t_vector *get_path(t_vector *graph, t_door *start_door, t_door *end_door, unsign
         path = vec_create(10);
         if(!path)
         {
+            vec_iter(paths,vec_free);
+            vec_free(paths);
             free_all(graph);
             return (NULL);
         }

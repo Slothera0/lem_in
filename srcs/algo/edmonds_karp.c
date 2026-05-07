@@ -19,8 +19,6 @@ t_vector *edmonds_karp(t_lem_in *data)
     graph = build_flow_graph(data, &start_door,&end_door);
     if (!graph)
         return (NULL);
-    edge = (t_edge *)start_door->out->edges->array[0];
-
     while(1)
     {
         reset_fnodes(graph);
