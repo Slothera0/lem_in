@@ -19,7 +19,7 @@ int	ft_putnbr_base(long long nbr, char *base)
 	int	temp;
 
 	temp = 0;
-	if (nbr > -ft_strlen(base) && nbr < ft_strlen(base))
+	if (nbr > -(long long)ft_strlen(base) && nbr < (long long)ft_strlen(base))
 		return (print_digit(nbr, base));
 	if (nbr < 0)
 	{

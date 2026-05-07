@@ -38,7 +38,7 @@ int	ft_printf(const char *s, ...)
 			i++;
 	}
 	va_end(tab);
-	if (i != ft_strlen(s))
+	if ((size_t)i != ft_strlen(s))
 		return (-1);
 	return (count);
 }
