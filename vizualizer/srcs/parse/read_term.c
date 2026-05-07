@@ -42,7 +42,6 @@ t_lem_in *read_term()
 			perror("ERROR");
 		exit(1);
 	}
-	
 	parse_data();
 	data->node = nodes;
 

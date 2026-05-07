@@ -21,10 +21,10 @@
 # include <stddef.h>
 # include <unistd.h>
 
-int	ft_putchar(char c);
-int	ft_putnbr_base(long long nbr, char *base);
-int	ft_putstr(char *str);
-int	ft_printf(const char *s, ...);
-int	ft_strlen(const char *str);
+int		ft_putchar(char c);
+int		ft_putnbr_base(long long nbr, char *base);
+int		ft_putstr(char *str);
+int		ft_printf(const char *s, ...);
+size_t	ft_strlen(const char *s);
 
 #endif

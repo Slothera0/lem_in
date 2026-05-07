@@ -4,6 +4,7 @@
 #include "vector.h"
 #include "distrib_ants.h"
 #include "libft.h"
+#include "ft_printf.h"
 #include <stdlib.h>
 
 #include <stdio.h>
@@ -50,8 +51,10 @@ int	main()
 		return (1);
 	}
 
+	ft_printf("%d\n", data->nb_ants);
 	vec_iter(data->map, ft_put_vecstr);
-	ft_putchar_fd('\n', 1);
+	ft_printf("\n");
+
 	print_walk(distrib, data->nb_ants);
 
 	free(distrib);
