@@ -10,7 +10,7 @@ t_vector *get_path(t_vector *graph, t_door *start_door, t_door *end_door, unsign
     paths = vec_create(graph->size);
     if (!paths)
     {
-        free_all(graph);
+        free_flow_graph(graph);
         return(NULL);
     }
 
@@ -21,7 +21,7 @@ t_vector *get_path(t_vector *graph, t_door *start_door, t_door *end_door, unsign
         {
             vec_iter(paths,vec_free);
             vec_free(paths);
-            free_all(graph);
+            free_flow_graph(graph);
             return (NULL);
         }
         if (rebuilt_path(start_door, end_door, &path) == 0)
@@ -29,7 +29,7 @@ t_vector *get_path(t_vector *graph, t_door *start_door, t_door *end_door, unsign
             vec_free(path);
             vec_iter(paths,vec_free);
             vec_free(paths);
-            free_all(graph);
+            free_flow_graph(graph);
             return (NULL);
         }
         tmp = vec_append(paths, path);
@@ -38,7 +38,7 @@ t_vector *get_path(t_vector *graph, t_door *start_door, t_door *end_door, unsign
             vec_free(path);
             vec_iter(paths,vec_free);
             vec_free(paths);
-            free_all(graph);
+            free_flow_graph(graph);
             return (NULL);
         }
         paths = tmp;
@@ -46,6 +46,6 @@ t_vector *get_path(t_vector *graph, t_door *start_door, t_door *end_door, unsign
     sort_path_by_size(paths);
     path_good = best_k_path(paths, nb_ants);
     remove_path_usless(paths, path_good);
-    free_all(graph);
+    free_flow_graph(graph);
     return paths;
 }

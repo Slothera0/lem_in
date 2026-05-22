@@ -19,7 +19,7 @@ t_vector *edmonds_karp(t_lem_in *data);
 void free_edge(void *data);
 void free_fnode(void *data);
 void free_door(void *data);
-void free_all(void *data);
+void free_flow_graph(void *data);
 void sort_path_by_size(t_vector *all_path);
 unsigned int score_k_path(t_vector *all_path, unsigned int k, unsigned int nb_ants);
 unsigned int best_k_path(t_vector *all_path, unsigned int nb_ants);

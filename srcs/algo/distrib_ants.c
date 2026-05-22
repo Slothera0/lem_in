@@ -3,6 +3,7 @@
 #include "vector.h"
 #include <limits.h>
 #include <stdlib.h>
+#include "ft_printf.h"
 
 t_distrib_ants *distrib_ants(t_lem_in *data, t_vector *all_path)
 {
@@ -14,7 +15,7 @@ t_distrib_ants *distrib_ants(t_lem_in *data, t_vector *all_path)
 	t_vector		*path;
 
 	if (all_path->size == 0)
-	  return (NULL);
+		return (NULL);
 	distrib = malloc(sizeof(t_distrib_ants) * data->nb_ants);
 	if (!distrib)
 		return (NULL);

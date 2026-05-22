@@ -12,6 +12,7 @@
 t_lem_in		*read_term();
 t_distrib_ants	*distrib_ants(t_lem_in *data, t_vector *all_path);
 int				print_walk(t_distrib_ants *distrib, unsigned int assigned_ants);
+void 			free_all(t_lem_in *data, t_vector *nodes, t_vector *path, t_distrib_ants *distrib);
 
 void	print_way(void *data);
 void	print_all_path(t_vector *all_path);
@@ -24,6 +25,7 @@ int	main()
 	t_vector *path;
 	t_distrib_ants *distrib;
 
+	distrib = NULL;
 	data = read_term();
 
 	nodes = data->node;
@@ -31,39 +33,22 @@ int	main()
 	path = edmonds_karp(data);
 	if (!path)
 	{
-		vec_iter(nodes, free_node);
-		vec_free(nodes);
-		vec_iter(data->map, free);
-		vec_free(data->map);
-		free(data);
+		ft_putstr_fd("ERROR\n", 2);
+		free_all(data, nodes, path, distrib);
 		return (1);
 	}
 	distrib = distrib_ants(data, path);
 	if (!distrib)
 	{
-		vec_iter(path, vec_free);
-		vec_free(path);
-		vec_iter(nodes, free_node);
-		vec_free(nodes);
-		vec_iter(data->map, free);
-		vec_free(data->map);
-		free(data);
+		ft_putstr_fd("ERROR\n", 2);
+		free_all(data, nodes, path, distrib);
 		return (1);
 	}
-
 	ft_printf("%d\n", data->nb_ants);
 	vec_iter(data->map, ft_put_vecstr);
 	ft_printf("\n");
 
 	print_walk(distrib, data->nb_ants);
-
-	free(distrib);
-	vec_iter(path, vec_free);
-	vec_free(path);
-	vec_iter(nodes, free_node);
-	vec_free(nodes);
-	vec_iter(data->map, free);
-	vec_free(data->map);
-	free(data);
+	free_all(data, nodes, path, distrib);
 	return (0);
 }

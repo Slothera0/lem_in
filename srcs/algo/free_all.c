@@ -1,6 +1,6 @@
 #include "flow.h"
 
-void free_all(void *data)
+void free_flow_graph(void *data)
 {
     t_vector *vec;
 

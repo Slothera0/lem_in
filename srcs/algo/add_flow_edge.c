@@ -70,7 +70,7 @@ t_vector *build_flow_graph(t_lem_in *data, t_door **start_door, t_door **end_doo
         if (!tmp)
         {
             free_door(doorA);
-            free_all(graph);
+            free_flow_graph(graph);
             return (NULL);
         }
         graph = tmp;

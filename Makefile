@@ -9,6 +9,7 @@ F_ALGO = $(F_SRCS)algo/
 
 SRCS = 	$(F_SRCS)main.c \
 		$(F_SRCS)error.c \
+		$(F_SRCS)free_all.c \
 		$(F_SRCS)print_path.c \
 		$(F_SRCS)print_way.c \
 		$(F_SRCS)print_all_path.c \
