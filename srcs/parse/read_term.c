@@ -58,6 +58,8 @@ t_lem_in *read_term()
 	{
 		vec_iter(nodes, free_node);
 		vec_free(nodes);
+		vec_iter(map, free);
+		vec_free(map);
 		free(data);
 		ft_putstr_fd("ERROR\n", 2);
 		exit(1);

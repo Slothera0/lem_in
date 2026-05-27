@@ -7,8 +7,6 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
-#include <stdio.h>
-
 t_lem_in		*read_term();
 t_distrib_ants	*distrib_ants(t_lem_in *data, t_vector *all_path);
 int				print_walk(t_distrib_ants *distrib, unsigned int assigned_ants);
